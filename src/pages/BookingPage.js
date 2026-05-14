@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { db } from "../firebase";
 
 import {
@@ -7,7 +8,10 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
+import { QRCodeCanvas } from "qrcode.react";
+
 export default function BookingPage() {
+
   const MAX_CAPACITY = 200;
   const PRICE_PER_PERSON = 35000;
 
@@ -38,17 +42,19 @@ export default function BookingPage() {
     useState([]);
 
   const [name, setName] = useState("");
-
   const [phone, setPhone] = useState("");
-
   const [guests, setGuests] = useState(1);
-
   const [notes, setNotes] = useState("");
 
+  const [showTicket, setShowTicket] =
+    useState(false);
+
   useEffect(() => {
+
     const unsubscribe = onSnapshot(
       collection(db, "bookings"),
       (snapshot) => {
+
         const booked = snapshot.docs.map(
           (doc) => ({
             table: doc.data().table,
@@ -57,10 +63,12 @@ export default function BookingPage() {
         );
 
         setBookedTables(booked);
+
       }
     );
 
     return () => unsubscribe();
+
   }, []);
 
   const totalGuests = bookedTables.reduce(
@@ -73,46 +81,59 @@ export default function BookingPage() {
     MAX_CAPACITY - totalGuests;
 
   const handleBooking = async () => {
+
     if (
       !name ||
       !phone ||
       !selectedTable
     ) {
+
       alert("Please fill all fields");
       return;
+
     }
 
     try {
+
       await addDoc(
         collection(db, "bookings"),
         {
+
           table: selectedTable,
+
           customerName: name,
+
           phone: phone,
+
           guests: Number(guests),
+
           notes: notes,
+
           totalPrice:
             Number(guests) *
             PRICE_PER_PERSON,
+
           createdAt: new Date(),
+
         }
       );
 
+      setShowTicket(true);
+
       alert("Booking Saved Successfully ✅");
 
-      setName("");
-      setPhone("");
-      setGuests(1);
-      setNotes("");
-      setSelectedTable(null);
-
     } catch (error) {
+
       console.log(error);
+
       alert("Error saving booking");
+
     }
+
   };
 
   const renderTable = (table) => {
+
     const isBooked =
       bookedTables.some(
         (booking) =>
@@ -120,16 +141,22 @@ export default function BookingPage() {
       );
 
     return (
+
       <div
         key={table}
         onClick={() => {
+
           if (!isBooked) {
+
             setSelectedTable(table);
+
           }
+
         }}
         style={{
-          width: isMobile ? 45 : 70,
-          height: isMobile ? 45 : 70,
+
+          width: isMobile ? 38 : 70,
+          height: isMobile ? 38 : 70,
 
           borderRadius: 12,
 
@@ -145,7 +172,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 12 : 18,
+            isMobile ? 10 : 18,
 
           color: "white",
 
@@ -174,10 +201,13 @@ export default function BookingPage() {
       >
         {table}
       </div>
+
     );
+
   };
 
   return (
+
     <div
       style={{
         background: "#050505",
@@ -189,6 +219,7 @@ export default function BookingPage() {
         fontFamily: "Arial",
       }}
     >
+
       {/* EVENT CARD */}
 
       <div
@@ -212,6 +243,7 @@ export default function BookingPage() {
           marginBottom: 25,
         }}
       >
+
         <img
           src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
           alt=""
@@ -231,6 +263,7 @@ export default function BookingPage() {
         />
 
         <div>
+
           <h1
             style={{
               fontSize: isMobile
@@ -289,7 +322,9 @@ export default function BookingPage() {
             {" "}
             {remainingSeats}
           </p>
+
         </div>
+
       </div>
 
       {/* HALL */}
@@ -304,6 +339,7 @@ export default function BookingPage() {
           overflowX: "hidden",
         }}
       >
+
         {/* STAGE */}
 
         <div
@@ -349,6 +385,7 @@ export default function BookingPage() {
             gap: isMobile ? 10 : 40,
           }}
         >
+
           <div
             style={{
               display: "grid",
@@ -384,6 +421,7 @@ export default function BookingPage() {
               .slice(0, 16)
               .map(renderTable)}
           </div>
+
         </div>
 
         {/* ENTRANCE */}
@@ -426,6 +464,7 @@ export default function BookingPage() {
             gap: isMobile ? 10 : 40,
           }}
         >
+
           <div
             style={{
               display: "grid",
@@ -461,7 +500,9 @@ export default function BookingPage() {
               .slice(16)
               .map(renderTable)}
           </div>
+
         </div>
+
       </div>
 
       {/* BOOKING */}
@@ -476,6 +517,7 @@ export default function BookingPage() {
             : 35,
         }}
       >
+
         <h2
           style={{
             fontSize:
@@ -506,6 +548,7 @@ export default function BookingPage() {
             alignItems: "center",
           }}
         >
+
           <span
             style={{
               fontSize:
@@ -527,6 +570,7 @@ export default function BookingPage() {
           >
             {selectedTable || "--"}
           </span>
+
         </div>
 
         <input
@@ -558,6 +602,7 @@ export default function BookingPage() {
             marginBottom: 20,
           }}
         >
+
           <button
             onClick={() => {
               if (guests > 1) {
@@ -604,6 +649,7 @@ export default function BookingPage() {
           >
             +
           </button>
+
         </div>
 
         <textarea
@@ -637,7 +683,9 @@ export default function BookingPage() {
             marginBottom: 25,
           }}
         >
+
           <div>
+
             <p
               style={{
                 color: "#aaa",
@@ -650,9 +698,11 @@ export default function BookingPage() {
             <h2>
               35,000 IQD
             </h2>
+
           </div>
 
           <div>
+
             <p
               style={{
                 color: "#aaa",
@@ -672,7 +722,9 @@ export default function BookingPage() {
               {" "}
               IQD
             </h2>
+
           </div>
+
         </div>
 
         <button
@@ -700,12 +752,107 @@ export default function BookingPage() {
         >
           Confirm Booking
         </button>
+
       </div>
+
+      {/* TICKET */}
+
+      {showTicket && (
+
+        <div
+          style={{
+            background: "#0b0b0b",
+            borderRadius: 25,
+            border: "1px solid #1f1f1f",
+            padding: isMobile ? 20 : 35,
+            marginTop: 25,
+            textAlign: "center",
+          }}
+        >
+
+          <h2
+            style={{
+              fontSize:
+                isMobile ? 28 : 40,
+              marginBottom: 20,
+              color: "#39ff14",
+            }}
+          >
+            Booking Confirmed ✅
+          </h2>
+
+          <p
+            style={{
+              fontSize:
+                isMobile ? 18 : 24,
+              marginBottom: 10,
+            }}
+          >
+            Thank you for your booking
+          </p>
+
+          <p
+            style={{
+              color: "#ccc",
+              marginBottom: 10,
+            }}
+          >
+            Name: {name}
+          </p>
+
+          <p
+            style={{
+              color: "#ccc",
+              marginBottom: 10,
+            }}
+          >
+            Table: {selectedTable}
+          </p>
+
+          <p
+            style={{
+              color: "#ccc",
+              marginBottom: 25,
+            }}
+          >
+            Guests: {guests}
+          </p>
+
+          <div
+            style={{
+              background: "white",
+              width: "fit-content",
+              margin: "0 auto",
+              padding: 15,
+              borderRadius: 20,
+            }}
+          >
+
+            <QRCodeCanvas
+              value={`
+Booking VIP
+Name: ${name}
+Table: ${selectedTable}
+Guests: ${guests}
+Phone: ${phone}
+`}
+              size={220}
+            />
+
+          </div>
+
+        </div>
+
+      )}
+
     </div>
+
   );
+
 }
 
 const inputStyle = {
+
   width: "100%",
 
   padding: "18px",
@@ -724,6 +871,7 @@ const inputStyle = {
 };
 
 const countBtn = {
+
   width: 70,
 
   height: 60,
