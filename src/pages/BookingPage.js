@@ -8,7 +8,6 @@ import {
 } from "firebase/firestore";
 
 export default function BookingPage() {
-
   const MAX_CAPACITY = 200;
   const PRICE_PER_PERSON = 35000;
 
@@ -47,11 +46,9 @@ export default function BookingPage() {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-
     const unsubscribe = onSnapshot(
       collection(db, "bookings"),
       (snapshot) => {
-
         const booked = snapshot.docs.map(
           (doc) => ({
             table: doc.data().table,
@@ -60,12 +57,10 @@ export default function BookingPage() {
         );
 
         setBookedTables(booked);
-
       }
     );
 
     return () => unsubscribe();
-
   }, []);
 
   const totalGuests = bookedTables.reduce(
@@ -78,59 +73,46 @@ export default function BookingPage() {
     MAX_CAPACITY - totalGuests;
 
   const handleBooking = async () => {
-
     if (
       !name ||
       !phone ||
-      !guests ||
       !selectedTable
     ) {
-
       alert("Please fill all fields");
-
       return;
-
     }
 
     try {
-
       await addDoc(
         collection(db, "bookings"),
         {
-
           table: selectedTable,
-
           customerName: name,
-
           phone: phone,
-
           guests: Number(guests),
-
           notes: notes,
-
           totalPrice:
             Number(guests) *
             PRICE_PER_PERSON,
-
           createdAt: new Date(),
-
         }
       );
 
-      alert("Booking Saved ✅");
+      alert("Booking Saved Successfully ✅");
+
+      setName("");
+      setPhone("");
+      setGuests(1);
+      setNotes("");
+      setSelectedTable(null);
 
     } catch (error) {
-
       console.log(error);
-
       alert("Error saving booking");
-
     }
-
   };
 
   const renderTable = (table) => {
-
     const isBooked =
       bookedTables.some(
         (booking) =>
@@ -138,21 +120,16 @@ export default function BookingPage() {
       );
 
     return (
-
       <div
         key={table}
         onClick={() => {
-
           if (!isBooked) {
-
             setSelectedTable(table);
-
           }
-
         }}
         style={{
-          width: isMobile ? 55 : 70,
-          height: isMobile ? 55 : 70,
+          width: isMobile ? 45 : 70,
+          height: isMobile ? 45 : 70,
 
           borderRadius: 12,
 
@@ -166,6 +143,9 @@ export default function BookingPage() {
               : "pointer",
 
           fontWeight: "bold",
+
+          fontSize:
+            isMobile ? 12 : 18,
 
           color: "white",
 
@@ -194,13 +174,10 @@ export default function BookingPage() {
       >
         {table}
       </div>
-
     );
-
   };
 
   return (
-
     <div
       style={{
         background: "#050505",
@@ -212,7 +189,6 @@ export default function BookingPage() {
         fontFamily: "Arial",
       }}
     >
-
       {/* EVENT CARD */}
 
       <div
@@ -236,7 +212,6 @@ export default function BookingPage() {
           marginBottom: 25,
         }}
       >
-
         <img
           src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
           alt=""
@@ -256,7 +231,6 @@ export default function BookingPage() {
         />
 
         <div>
-
           <h1
             style={{
               fontSize: isMobile
@@ -271,7 +245,8 @@ export default function BookingPage() {
 
           <p
             style={{
-              fontSize: 28,
+              fontSize:
+                isMobile ? 18 : 28,
               color: "#ccc",
             }}
           >
@@ -280,7 +255,8 @@ export default function BookingPage() {
 
           <p
             style={{
-              fontSize: 28,
+              fontSize:
+                isMobile ? 18 : 28,
               color: "#ccc",
             }}
           >
@@ -289,7 +265,8 @@ export default function BookingPage() {
 
           <p
             style={{
-              fontSize: 28,
+              fontSize:
+                isMobile ? 18 : 28,
               color: "#ccc",
             }}
           >
@@ -298,9 +275,13 @@ export default function BookingPage() {
 
           <p
             style={{
-              fontSize: 32,
+              fontSize:
+                isMobile ? 24 : 32,
+
               color: "#39ff14",
+
               fontWeight: "bold",
+
               marginTop: 20,
             }}
           >
@@ -308,9 +289,7 @@ export default function BookingPage() {
             {" "}
             {remainingSeats}
           </p>
-
         </div>
-
       </div>
 
       {/* HALL */}
@@ -320,11 +299,11 @@ export default function BookingPage() {
           background: "#0b0b0b",
           borderRadius: 25,
           border: "1px solid #1f1f1f",
-          padding: 25,
+          padding: isMobile ? 15 : 25,
           marginBottom: 25,
+          overflowX: "hidden",
         }}
       >
-
         {/* STAGE */}
 
         <div
@@ -344,9 +323,8 @@ export default function BookingPage() {
 
             textAlign: "center",
 
-            fontSize: isMobile
-              ? 28
-              : 40,
+            fontSize:
+              isMobile ? 24 : 40,
 
             fontWeight: "bold",
 
@@ -358,57 +336,54 @@ export default function BookingPage() {
           STAGE
         </div>
 
-        {/* TABLES */}
+        {/* TOP TABLES */}
 
         <div
           style={{
             display: "flex",
-            justifyContent:
-              "space-between",
-            gap: 30,
+
+            justifyContent: "center",
+
+            alignItems: "flex-start",
+
+            gap: isMobile ? 10 : 40,
           }}
         >
-
-          {/* LEFT */}
-
           <div
             style={{
               display: "grid",
+
               gridTemplateColumns:
                 "repeat(4,1fr)",
-              gap: 20,
+
+              gap: isMobile ? 12 : 20,
             }}
           >
-
             {tables
               .filter((t) =>
                 t.startsWith("L")
               )
               .slice(0, 16)
               .map(renderTable)}
-
           </div>
-
-          {/* RIGHT */}
 
           <div
             style={{
               display: "grid",
+
               gridTemplateColumns:
                 "repeat(4,1fr)",
-              gap: 20,
+
+              gap: isMobile ? 12 : 20,
             }}
           >
-
             {tables
               .filter((t) =>
                 t.startsWith("R")
               )
               .slice(0, 16)
               .map(renderTable)}
-
           </div>
-
         </div>
 
         {/* ENTRANCE */}
@@ -417,10 +392,10 @@ export default function BookingPage() {
           style={{
             textAlign: "center",
 
-            margin:
-              "40px 0",
+            margin: "40px 0",
 
-            fontSize: 40,
+            fontSize:
+              isMobile ? 28 : 40,
 
             color: "#c14cff",
 
@@ -438,55 +413,55 @@ export default function BookingPage() {
           ENTRANCE
         </div>
 
-        {/* BOTTOM */}
+        {/* BOTTOM TABLES */}
 
         <div
           style={{
             display: "flex",
-            justifyContent:
-              "space-between",
-            gap: 30,
+
+            justifyContent: "center",
+
+            alignItems: "flex-start",
+
+            gap: isMobile ? 10 : 40,
           }}
         >
-
           <div
             style={{
               display: "grid",
+
               gridTemplateColumns:
                 "repeat(4,1fr)",
-              gap: 20,
+
+              gap: isMobile ? 12 : 20,
             }}
           >
-
             {tables
               .filter((t) =>
                 t.startsWith("L")
               )
               .slice(16)
               .map(renderTable)}
-
           </div>
 
           <div
             style={{
               display: "grid",
+
               gridTemplateColumns:
                 "repeat(4,1fr)",
-              gap: 20,
+
+              gap: isMobile ? 12 : 20,
             }}
           >
-
             {tables
               .filter((t) =>
                 t.startsWith("R")
               )
               .slice(16)
               .map(renderTable)}
-
           </div>
-
         </div>
-
       </div>
 
       {/* BOOKING */}
@@ -501,17 +476,16 @@ export default function BookingPage() {
             : 35,
         }}
       >
-
         <h2
           style={{
-            fontSize: 45,
+            fontSize:
+              isMobile ? 30 : 45,
+
             marginBottom: 30,
           }}
         >
           Booking Summary
         </h2>
-
-        {/* Selected Table */}
 
         <div
           style={{
@@ -532,10 +506,10 @@ export default function BookingPage() {
             alignItems: "center",
           }}
         >
-
           <span
             style={{
-              fontSize: 22,
+              fontSize:
+                isMobile ? 16 : 22,
             }}
           >
             🪑 Selected Table:
@@ -544,16 +518,16 @@ export default function BookingPage() {
           <span
             style={{
               color: "#39ff14",
+
               fontWeight: "bold",
-              fontSize: 24,
+
+              fontSize:
+                isMobile ? 18 : 24,
             }}
           >
             {selectedTable || "--"}
           </span>
-
         </div>
-
-        {/* INPUTS */}
 
         <input
           type="text"
@@ -584,18 +558,13 @@ export default function BookingPage() {
             marginBottom: 20,
           }}
         >
-
           <button
             onClick={() => {
-
               if (guests > 1) {
-
                 setGuests(
                   guests - 1
                 );
-
               }
-
             }}
             style={countBtn}
           >
@@ -605,13 +574,20 @@ export default function BookingPage() {
           <div
             style={{
               flex: 1,
+
               background: "#111",
+
               border:
                 "1px solid #333",
+
               borderRadius: 15,
+
               display: "flex",
+
               alignItems: "center",
+
               justifyContent: "center",
+
               fontSize: 26,
             }}
           >
@@ -628,7 +604,6 @@ export default function BookingPage() {
           >
             +
           </button>
-
         </div>
 
         <textarea
@@ -649,7 +624,9 @@ export default function BookingPage() {
         <div
           style={{
             background: "#111",
+
             borderRadius: 20,
+
             padding: 25,
 
             display: "flex",
@@ -660,9 +637,7 @@ export default function BookingPage() {
             marginBottom: 25,
           }}
         >
-
           <div>
-
             <p
               style={{
                 color: "#aaa",
@@ -675,11 +650,9 @@ export default function BookingPage() {
             <h2>
               35,000 IQD
             </h2>
-
           </div>
 
           <div>
-
             <p
               style={{
                 color: "#aaa",
@@ -699,38 +672,40 @@ export default function BookingPage() {
               {" "}
               IQD
             </h2>
-
           </div>
-
         </div>
 
         <button
           onClick={handleBooking}
           style={{
             width: "100%",
+
             padding: 22,
+
             borderRadius: 18,
+
             border: "none",
+
             background: "#d4a017",
+
             color: "#000",
-            fontSize: 26,
+
+            fontSize:
+              isMobile ? 20 : 26,
+
             fontWeight: "bold",
+
             cursor: "pointer",
           }}
         >
           Confirm Booking
         </button>
-
       </div>
-
     </div>
-
   );
-
 }
 
 const inputStyle = {
-
   width: "100%",
 
   padding: "18px",
@@ -746,11 +721,9 @@ const inputStyle = {
   color: "white",
 
   fontSize: "18px",
-
 };
 
 const countBtn = {
-
   width: 70,
 
   height: 60,
@@ -766,5 +739,4 @@ const countBtn = {
   fontSize: 30,
 
   cursor: "pointer",
-
 };
