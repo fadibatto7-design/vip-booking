@@ -810,7 +810,7 @@ export default function BookingPage() {
                 marginBottom: 25,
               }}
             >
-              يرجى إظهار QR عند مدخل القاعة
+             QR code for your tecket
             </p>
 
             <div
