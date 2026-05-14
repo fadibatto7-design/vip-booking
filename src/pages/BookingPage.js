@@ -38,11 +38,8 @@ export default function BookingPage() {
     useState([]);
 
   const [name, setName] = useState("");
-
   const [phone, setPhone] = useState("");
-
   const [guests, setGuests] = useState(1);
-
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
@@ -189,6 +186,7 @@ export default function BookingPage() {
         fontFamily: "Arial",
       }}
     >
+
       {/* EVENT CARD */}
 
       <div
@@ -212,6 +210,7 @@ export default function BookingPage() {
           marginBottom: 25,
         }}
       >
+
         <img
           src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
           alt=""
@@ -231,6 +230,7 @@ export default function BookingPage() {
         />
 
         <div>
+
           <h1
             style={{
               fontSize: isMobile
@@ -289,7 +289,9 @@ export default function BookingPage() {
             {" "}
             {remainingSeats}
           </p>
+
         </div>
+
       </div>
 
       {/* HALL */}
@@ -297,13 +299,19 @@ export default function BookingPage() {
       <div
         style={{
           background: "#0b0b0b",
+
           borderRadius: 25,
+
           border: "1px solid #1f1f1f",
+
           padding: isMobile ? 15 : 25,
+
           marginBottom: 25,
-          overflowX: "hidden",
+
+          overflow: "hidden",
         }}
       >
+
         {/* STAGE */}
 
         <div
@@ -346,15 +354,22 @@ export default function BookingPage() {
 
             alignItems: "flex-start",
 
-            gap: isMobile ? 10 : 40,
+            flexWrap: "wrap",
+
+            gap: isMobile ? 20 : 40,
           }}
         >
+
+          {/* LEFT */}
+
           <div
             style={{
               display: "grid",
 
               gridTemplateColumns:
-                "repeat(4,1fr)",
+                isMobile
+                  ? "repeat(3,1fr)"
+                  : "repeat(4,1fr)",
 
               gap: isMobile ? 12 : 20,
             }}
@@ -367,12 +382,16 @@ export default function BookingPage() {
               .map(renderTable)}
           </div>
 
+          {/* RIGHT */}
+
           <div
             style={{
               display: "grid",
 
               gridTemplateColumns:
-                "repeat(4,1fr)",
+                isMobile
+                  ? "repeat(3,1fr)"
+                  : "repeat(4,1fr)",
 
               gap: isMobile ? 12 : 20,
             }}
@@ -384,6 +403,7 @@ export default function BookingPage() {
               .slice(0, 16)
               .map(renderTable)}
           </div>
+
         </div>
 
         {/* ENTRANCE */}
@@ -423,15 +443,22 @@ export default function BookingPage() {
 
             alignItems: "flex-start",
 
-            gap: isMobile ? 10 : 40,
+            flexWrap: "wrap",
+
+            gap: isMobile ? 20 : 40,
           }}
         >
+
+          {/* LEFT */}
+
           <div
             style={{
               display: "grid",
 
               gridTemplateColumns:
-                "repeat(4,1fr)",
+                isMobile
+                  ? "repeat(3,1fr)"
+                  : "repeat(4,1fr)",
 
               gap: isMobile ? 12 : 20,
             }}
@@ -444,12 +471,16 @@ export default function BookingPage() {
               .map(renderTable)}
           </div>
 
+          {/* RIGHT */}
+
           <div
             style={{
               display: "grid",
 
               gridTemplateColumns:
-                "repeat(4,1fr)",
+                isMobile
+                  ? "repeat(3,1fr)"
+                  : "repeat(4,1fr)",
 
               gap: isMobile ? 12 : 20,
             }}
@@ -461,7 +492,9 @@ export default function BookingPage() {
               .slice(16)
               .map(renderTable)}
           </div>
+
         </div>
+
       </div>
 
       {/* BOOKING */}
@@ -469,13 +502,17 @@ export default function BookingPage() {
       <div
         style={{
           background: "#0b0b0b",
+
           borderRadius: 25,
+
           border: "1px solid #1f1f1f",
+
           padding: isMobile
             ? 20
             : 35,
         }}
       >
+
         <h2
           style={{
             fontSize:
@@ -506,6 +543,7 @@ export default function BookingPage() {
             alignItems: "center",
           }}
         >
+
           <span
             style={{
               fontSize:
@@ -527,6 +565,7 @@ export default function BookingPage() {
           >
             {selectedTable || "--"}
           </span>
+
         </div>
 
         <input
@@ -558,6 +597,7 @@ export default function BookingPage() {
             marginBottom: 20,
           }}
         >
+
           <button
             onClick={() => {
               if (guests > 1) {
@@ -604,6 +644,7 @@ export default function BookingPage() {
           >
             +
           </button>
+
         </div>
 
         <textarea
@@ -637,6 +678,7 @@ export default function BookingPage() {
             marginBottom: 25,
           }}
         >
+
           <div>
             <p
               style={{
@@ -673,6 +715,7 @@ export default function BookingPage() {
               IQD
             </h2>
           </div>
+
         </div>
 
         <button
@@ -700,7 +743,9 @@ export default function BookingPage() {
         >
           Confirm Booking
         </button>
+
       </div>
+
     </div>
   );
 }
@@ -721,6 +766,10 @@ const inputStyle = {
   color: "white",
 
   fontSize: "18px",
+
+  outline: "none",
+
+  boxSizing: "border-box",
 };
 
 const countBtn = {
