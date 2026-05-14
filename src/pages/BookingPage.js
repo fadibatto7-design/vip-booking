@@ -207,69 +207,36 @@ export default function BookingPage() {
         }}
       >
 
-        <div
+        <h1
           style={{
-            display: "flex",
-            flexDirection:
-              isMobile ? "column" : "row",
-            gap: "25px",
-            alignItems: "center",
+            fontSize:
+              isMobile ? "35px" : "55px",
+            marginBottom: "20px",
           }}
         >
+          Music No1 VIP Party
+        </h1>
 
-          <img
-            src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
-            alt="poster"
-            style={{
-              width: isMobile ? "100%" : "220px",
-              maxWidth: "220px",
-              height: isMobile ? "260px" : "300px",
-              objectFit: "cover",
-              borderRadius: "20px",
-            }}
-          />
+        <p style={{ fontSize: "22px", color: "#ccc" }}>
+          📅 Friday, 20 June 2026
+        </p>
 
-          <div style={{ flex: 1 }}>
+        <p style={{ fontSize: "22px", color: "#ccc" }}>
+          📍 Baghdad Grand Hall
+        </p>
 
-            <h1
-              style={{
-                fontSize:
-                  isMobile ? "38px" : "55px",
-                marginBottom: "20px",
-                lineHeight: "1.1",
-              }}
-            >
-              Music No1 VIP Party
-            </h1>
-
-            <p style={{ fontSize: "24px", color: "#ccc" }}>
-              📅 Friday, 20 June 2026
-            </p>
-
-            <p style={{ fontSize: "24px", color: "#ccc" }}>
-              🕒 10:00 PM - 3:00 AM
-            </p>
-
-            <p style={{ fontSize: "24px", color: "#ccc" }}>
-              📍 Baghdad Grand Hall
-            </p>
-
-            <p
-              style={{
-                fontSize: "30px",
-                color: "#39ff14",
-                fontWeight: "bold",
-                marginTop: "20px",
-              }}
-            >
-              👥 Remaining Seats:
-              {" "}
-              {remainingSeats}
-            </p>
-
-          </div>
-
-        </div>
+        <p
+          style={{
+            fontSize: "28px",
+            color: "#39ff14",
+            marginTop: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          👥 Remaining Seats:
+          {" "}
+          {remainingSeats}
+        </p>
 
       </div>
 
@@ -286,30 +253,12 @@ export default function BookingPage() {
         <div
           style={{
             position: "relative",
-
-            width: isMobile ? "950px" : "1200px",
-
-            minWidth: isMobile
-              ? "950px"
-              : "1200px",
-
-            height: isMobile
-              ? "980px"
-              : "1200px",
-
+            width: "1200px",
+            height: "1200px",
             margin: "0 auto",
-
             background: "#0c0c0c",
-
             borderRadius: "30px",
-
             border: "2px solid #222",
-
-            transform: isMobile
-              ? "scale(0.82)"
-              : "scale(1)",
-
-            transformOrigin: "top left",
           }}
         >
 
@@ -328,31 +277,9 @@ export default function BookingPage() {
               alignItems: "center",
               fontSize: "42px",
               fontWeight: "bold",
-              color: "white",
             }}
           >
             STAGE
-          </div>
-
-          <div
-            style={{
-              position: "absolute",
-              top: 690,
-              left: 0,
-              width: "100%",
-              height: 80,
-              background: "#151515",
-              borderTop: "2px solid #c14cff",
-              borderBottom: "2px solid #c14cff",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontSize: "38px",
-              color: "#c14cff",
-              fontWeight: "bold",
-            }}
-          >
-            ENTRANCE
           </div>
 
           {tables.map((table) => {
@@ -380,13 +307,9 @@ export default function BookingPage() {
                 }}
                 style={{
                   position: "absolute",
-
                   top: table.top,
-
                   left: table.left,
-
                   width: 65,
-
                   height: 65,
 
                   background:
@@ -407,9 +330,7 @@ export default function BookingPage() {
                   borderRadius: "14px",
 
                   display: "flex",
-
                   justifyContent: "center",
-
                   alignItems: "center",
 
                   cursor:
@@ -422,13 +343,6 @@ export default function BookingPage() {
                   fontSize: "20px",
 
                   color: "white",
-
-                  boxShadow:
-                    selectedTable?.id === table.id
-                      ? "0 0 18px gold"
-                      : isBooked
-                      ? "0 0 12px red"
-                      : "0 0 12px #39ff14",
                 }}
               >
                 {table.id}
@@ -452,24 +366,128 @@ export default function BookingPage() {
             maxWidth: "900px",
             margin: "40px auto",
             background: "#111",
-            padding: isMobile
-              ? "22px"
-              : "35px",
-            borderRadius: "30px",
-            border: "1px solid #222",
+            padding: "30px",
+            borderRadius: "25px",
           }}
         >
 
           <h2
             style={{
-              textAlign: "center",
-              marginBottom: "35px",
-              fontSize:
-                isMobile ? "32px" : "42px",
+              marginBottom: "30px",
+              fontSize: "40px",
             }}
           >
             Booking Summary
           </h2>
+
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) =>
+              setName(e.target.value)
+            }
+            style={{
+              width: "100%",
+              padding: "18px",
+              marginBottom: "18px",
+              borderRadius: "15px",
+            }}
+          />
+
+          <input
+            type="text"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) =>
+              setPhone(e.target.value)
+            }
+            style={{
+              width: "100%",
+              padding: "18px",
+              marginBottom: "18px",
+              borderRadius: "15px",
+            }}
+          />
+
+          <input
+            type="number"
+            placeholder="Guests Count"
+            value={guests}
+            onChange={(e) =>
+              setGuests(e.target.value)
+            }
+            style={{
+              width: "100%",
+              padding: "18px",
+              marginBottom: "18px",
+              borderRadius: "15px",
+            }}
+          />
+
+          <textarea
+            rows="4"
+            placeholder="Notes"
+            value={notes}
+            onChange={(e) =>
+              setNotes(e.target.value)
+            }
+            style={{
+              width: "100%",
+              padding: "18px",
+              marginBottom: "20px",
+              borderRadius: "15px",
+            }}
+          />
+
+          <button
+            onClick={handleBooking}
+            style={{
+              width: "100%",
+              padding: "22px",
+              background: "#d4a017",
+              border: "none",
+              borderRadius: "18px",
+              fontSize: "24px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Confirm Booking
+          </button>
+
+        </div>
+
+      )}
+
+      {/* QR CODE */}
+
+      {showQR && selectedTable && (
+
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "500px",
+            margin: "40px auto",
+            background: "#111",
+            padding: "30px",
+            borderRadius: "25px",
+            textAlign: "center",
+          }}
+        >
+
+          <h2 style={{ marginBottom: "20px" }}>
+            Your Ticket
+          </h2>
+
+          <QRCodeCanvas
+            value={`
+Name: ${name}
+Table: ${selectedTable.id}
+Guests: ${guests}
+`}
+            size={220}
+          />
 
         </div>
 
