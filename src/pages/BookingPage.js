@@ -8,7 +8,6 @@ import {
 } from "firebase/firestore";
 
 export default function BookingPage() {
-
   const MAX_CAPACITY = 200;
   const PRICE_PER_PERSON = 35000;
 
@@ -39,16 +38,17 @@ export default function BookingPage() {
     useState([]);
 
   const [name, setName] = useState("");
+
   const [phone, setPhone] = useState("");
+
   const [guests, setGuests] = useState(1);
+
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-
     const unsubscribe = onSnapshot(
       collection(db, "bookings"),
       (snapshot) => {
-
         const booked = snapshot.docs.map(
           (doc) => ({
             table: doc.data().table,
@@ -57,12 +57,10 @@ export default function BookingPage() {
         );
 
         setBookedTables(booked);
-
       }
     );
 
     return () => unsubscribe();
-
   }, []);
 
   const totalGuests = bookedTables.reduce(
@@ -75,40 +73,28 @@ export default function BookingPage() {
     MAX_CAPACITY - totalGuests;
 
   const handleBooking = async () => {
-
     if (
       !name ||
       !phone ||
       !selectedTable
     ) {
-
       alert("Please fill all fields");
       return;
-
     }
 
     try {
-
       await addDoc(
         collection(db, "bookings"),
         {
-
           table: selectedTable,
-
           customerName: name,
-
           phone: phone,
-
           guests: Number(guests),
-
           notes: notes,
-
           totalPrice:
             Number(guests) *
             PRICE_PER_PERSON,
-
           createdAt: new Date(),
-
         }
       );
 
@@ -121,17 +107,12 @@ export default function BookingPage() {
       setSelectedTable(null);
 
     } catch (error) {
-
       console.log(error);
-
       alert("Error saving booking");
-
     }
-
   };
 
   const renderTable = (table) => {
-
     const isBooked =
       bookedTables.some(
         (booking) =>
@@ -139,22 +120,16 @@ export default function BookingPage() {
       );
 
     return (
-
       <div
         key={table}
         onClick={() => {
-
           if (!isBooked) {
-
             setSelectedTable(table);
-
           }
-
         }}
         style={{
-
-          width: isMobile ? 38 : 70,
-          height: isMobile ? 38 : 70,
+          width: isMobile ? 45 : 70,
+          height: isMobile ? 45 : 70,
 
           borderRadius: 12,
 
@@ -170,7 +145,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 10 : 18,
+            isMobile ? 12 : 18,
 
           color: "white",
 
@@ -199,13 +174,10 @@ export default function BookingPage() {
       >
         {table}
       </div>
-
     );
-
   };
 
   return (
-
     <div
       style={{
         background: "#050505",
@@ -217,7 +189,6 @@ export default function BookingPage() {
         fontFamily: "Arial",
       }}
     >
-
       {/* EVENT CARD */}
 
       <div
@@ -241,7 +212,6 @@ export default function BookingPage() {
           marginBottom: 25,
         }}
       >
-
         <img
           src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
           alt=""
@@ -261,7 +231,6 @@ export default function BookingPage() {
         />
 
         <div>
-
           <h1
             style={{
               fontSize: isMobile
@@ -320,9 +289,7 @@ export default function BookingPage() {
             {" "}
             {remainingSeats}
           </p>
-
         </div>
-
       </div>
 
       {/* HALL */}
@@ -330,19 +297,13 @@ export default function BookingPage() {
       <div
         style={{
           background: "#0b0b0b",
-
           borderRadius: 25,
-
           border: "1px solid #1f1f1f",
-
           padding: isMobile ? 15 : 25,
-
           marginBottom: 25,
-
-          overflow: "hidden",
+          overflowX: "hidden",
         }}
       >
-
         {/* STAGE */}
 
         <div
@@ -388,9 +349,6 @@ export default function BookingPage() {
             gap: isMobile ? 10 : 40,
           }}
         >
-
-          {/* LEFT */}
-
           <div
             style={{
               display: "grid",
@@ -409,8 +367,6 @@ export default function BookingPage() {
               .map(renderTable)}
           </div>
 
-          {/* RIGHT */}
-
           <div
             style={{
               display: "grid",
@@ -428,7 +384,6 @@ export default function BookingPage() {
               .slice(0, 16)
               .map(renderTable)}
           </div>
-
         </div>
 
         {/* ENTRANCE */}
@@ -471,9 +426,6 @@ export default function BookingPage() {
             gap: isMobile ? 10 : 40,
           }}
         >
-
-          {/* LEFT */}
-
           <div
             style={{
               display: "grid",
@@ -492,8 +444,6 @@ export default function BookingPage() {
               .map(renderTable)}
           </div>
 
-          {/* RIGHT */}
-
           <div
             style={{
               display: "grid",
@@ -511,19 +461,251 @@ export default function BookingPage() {
               .slice(16)
               .map(renderTable)}
           </div>
-
         </div>
-
       </div>
 
+      {/* BOOKING */}
+
+      <div
+        style={{
+          background: "#0b0b0b",
+          borderRadius: 25,
+          border: "1px solid #1f1f1f",
+          padding: isMobile
+            ? 20
+            : 35,
+        }}
+      >
+        <h2
+          style={{
+            fontSize:
+              isMobile ? 30 : 45,
+
+            marginBottom: 30,
+          }}
+        >
+          Booking Summary
+        </h2>
+
+        <div
+          style={{
+            border:
+              "1px solid #39ff14",
+
+            borderRadius: 15,
+
+            padding: 18,
+
+            marginBottom: 25,
+
+            display: "flex",
+
+            justifyContent:
+              "space-between",
+
+            alignItems: "center",
+          }}
+        >
+          <span
+            style={{
+              fontSize:
+                isMobile ? 16 : 22,
+            }}
+          >
+            🪑 Selected Table:
+          </span>
+
+          <span
+            style={{
+              color: "#39ff14",
+
+              fontWeight: "bold",
+
+              fontSize:
+                isMobile ? 18 : 24,
+            }}
+          >
+            {selectedTable || "--"}
+          </span>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) =>
+            setName(e.target.value)
+          }
+          style={inputStyle}
+        />
+
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={phone}
+          onChange={(e) =>
+            setPhone(e.target.value)
+          }
+          style={inputStyle}
+        />
+
+        {/* GUESTS */}
+
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            marginBottom: 20,
+          }}
+        >
+          <button
+            onClick={() => {
+              if (guests > 1) {
+                setGuests(
+                  guests - 1
+                );
+              }
+            }}
+            style={countBtn}
+          >
+            -
+          </button>
+
+          <div
+            style={{
+              flex: 1,
+
+              background: "#111",
+
+              border:
+                "1px solid #333",
+
+              borderRadius: 15,
+
+              display: "flex",
+
+              alignItems: "center",
+
+              justifyContent: "center",
+
+              fontSize: 26,
+            }}
+          >
+            {guests}
+          </div>
+
+          <button
+            onClick={() =>
+              setGuests(
+                guests + 1
+              )
+            }
+            style={countBtn}
+          >
+            +
+          </button>
+        </div>
+
+        <textarea
+          rows="4"
+          placeholder="Notes"
+          value={notes}
+          onChange={(e) =>
+            setNotes(e.target.value)
+          }
+          style={{
+            ...inputStyle,
+            resize: "none",
+          }}
+        />
+
+        {/* PRICE */}
+
+        <div
+          style={{
+            background: "#111",
+
+            borderRadius: 20,
+
+            padding: 25,
+
+            display: "flex",
+
+            justifyContent:
+              "space-between",
+
+            marginBottom: 25,
+          }}
+        >
+          <div>
+            <p
+              style={{
+                color: "#aaa",
+                marginBottom: 10,
+              }}
+            >
+              Price Per Person
+            </p>
+
+            <h2>
+              35,000 IQD
+            </h2>
+          </div>
+
+          <div>
+            <p
+              style={{
+                color: "#aaa",
+                marginBottom: 10,
+              }}
+            >
+              Total Price
+            </p>
+
+            <h2
+              style={{
+                color: "#39ff14",
+              }}
+            >
+              {guests *
+                PRICE_PER_PERSON}
+              {" "}
+              IQD
+            </h2>
+          </div>
+        </div>
+
+        <button
+          onClick={handleBooking}
+          style={{
+            width: "100%",
+
+            padding: 22,
+
+            borderRadius: 18,
+
+            border: "none",
+
+            background: "#d4a017",
+
+            color: "#000",
+
+            fontSize:
+              isMobile ? 20 : 26,
+
+            fontWeight: "bold",
+
+            cursor: "pointer",
+          }}
+        >
+          Confirm Booking
+        </button>
+      </div>
     </div>
-
   );
-
 }
 
 const inputStyle = {
-
   width: "100%",
 
   padding: "18px",
@@ -539,14 +721,9 @@ const inputStyle = {
   color: "white",
 
   fontSize: "18px",
-
-  outline: "none",
-
-  boxSizing: "border-box",
 };
 
 const countBtn = {
-
   width: 70,
 
   height: 60,
