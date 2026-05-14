@@ -192,7 +192,6 @@ export default function BookingPage() {
         color: "white",
         padding: isMobile ? "15px" : "30px",
         fontFamily: "Arial",
-        overflowX: "hidden",
       }}
     >
 
@@ -200,11 +199,6 @@ export default function BookingPage() {
 
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "25px",
-          justifyContent: "space-between",
-          alignItems: "center",
           background: "#0c0c0c",
           padding: isMobile ? "20px" : "30px",
           borderRadius: "25px",
@@ -216,7 +210,8 @@ export default function BookingPage() {
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
+            flexDirection:
+              isMobile ? "column" : "row",
             gap: "25px",
             alignItems: "center",
           }}
@@ -226,19 +221,20 @@ export default function BookingPage() {
             src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
             alt="poster"
             style={{
-              width: isMobile ? "120px" : "220px",
-              height: isMobile ? "170px" : "300px",
+              width: isMobile ? "100%" : "220px",
+              maxWidth: "220px",
+              height: isMobile ? "260px" : "300px",
               objectFit: "cover",
               borderRadius: "20px",
             }}
           />
 
-          <div>
+          <div style={{ flex: 1 }}>
 
             <h1
               style={{
                 fontSize:
-                  isMobile ? "32px" : "50px",
+                  isMobile ? "38px" : "55px",
                 marginBottom: "20px",
                 lineHeight: "1.1",
               }}
@@ -246,40 +242,21 @@ export default function BookingPage() {
               Music No1 VIP Party
             </h1>
 
-            <p
-              style={{
-                fontSize:
-                  isMobile ? "18px" : "24px",
-                color: "#ccc",
-              }}
-            >
+            <p style={{ fontSize: "24px", color: "#ccc" }}>
               📅 Friday, 20 June 2026
             </p>
 
-            <p
-              style={{
-                fontSize:
-                  isMobile ? "18px" : "24px",
-                color: "#ccc",
-              }}
-            >
+            <p style={{ fontSize: "24px", color: "#ccc" }}>
               🕒 10:00 PM - 3:00 AM
             </p>
 
-            <p
-              style={{
-                fontSize:
-                  isMobile ? "18px" : "24px",
-                color: "#ccc",
-              }}
-            >
+            <p style={{ fontSize: "24px", color: "#ccc" }}>
               📍 Baghdad Grand Hall
             </p>
 
             <p
               style={{
-                fontSize:
-                  isMobile ? "20px" : "28px",
+                fontSize: "30px",
                 color: "#39ff14",
                 fontWeight: "bold",
                 marginTop: "20px",
@@ -309,17 +286,32 @@ export default function BookingPage() {
         <div
           style={{
             position: "relative",
-            width: "1200px",
-            minWidth: "1200px",
-            height: "1200px",
+
+            width: isMobile ? "950px" : "1200px",
+
+            minWidth: isMobile
+              ? "950px"
+              : "1200px",
+
+            height: isMobile
+              ? "980px"
+              : "1200px",
+
             margin: "0 auto",
+
             background: "#0c0c0c",
+
             borderRadius: "30px",
+
             border: "2px solid #222",
+
+            transform: isMobile
+              ? "scale(0.82)"
+              : "scale(1)",
+
+            transformOrigin: "top left",
           }}
         >
-
-          {/* STAGE */}
 
           <div
             style={{
@@ -334,14 +326,13 @@ export default function BookingPage() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              fontSize: "45px",
+              fontSize: "42px",
               fontWeight: "bold",
+              color: "white",
             }}
           >
             STAGE
           </div>
-
-          {/* ENTRANCE */}
 
           <div
             style={{
@@ -356,15 +347,13 @@ export default function BookingPage() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              fontSize: "40px",
+              fontSize: "38px",
               color: "#c14cff",
               fontWeight: "bold",
             }}
           >
             ENTRANCE
           </div>
-
-          {/* TABLES */}
 
           {tables.map((table) => {
 
@@ -391,30 +380,36 @@ export default function BookingPage() {
                 }}
                 style={{
                   position: "absolute",
+
                   top: table.top,
+
                   left: table.left,
-                  width: 75,
-                  height: 75,
+
+                  width: 65,
+
+                  height: 65,
 
                   background:
                     selectedTable?.id === table.id
                       ? "#d4a017"
                       : isBooked
-                      ? "#7a1010"
-                      : "#102c10",
+                      ? "#8b0000"
+                      : "#082d08",
 
                   border: `2px solid ${
                     selectedTable?.id === table.id
                       ? "#ffd700"
                       : isBooked
-                      ? "red"
+                      ? "#ff0000"
                       : "#39ff14"
                   }`,
 
-                  borderRadius: "12px",
+                  borderRadius: "14px",
 
                   display: "flex",
+
                   justifyContent: "center",
+
                   alignItems: "center",
 
                   cursor:
@@ -423,14 +418,17 @@ export default function BookingPage() {
                       : "pointer",
 
                   fontWeight: "bold",
-                  fontSize: "22px",
+
+                  fontSize: "20px",
+
+                  color: "white",
 
                   boxShadow:
                     selectedTable?.id === table.id
-                      ? "0 0 20px gold"
+                      ? "0 0 18px gold"
                       : isBooked
-                      ? "0 0 10px red"
-                      : "0 0 10px #39ff14",
+                      ? "0 0 12px red"
+                      : "0 0 12px #39ff14",
                 }}
               >
                 {table.id}
@@ -450,11 +448,14 @@ export default function BookingPage() {
 
         <div
           style={{
-            width: isMobile ? "100%" : "550px",
+            width: "100%",
+            maxWidth: "900px",
             margin: "40px auto",
             background: "#111",
-            padding: "35px",
-            borderRadius: "25px",
+            padding: isMobile
+              ? "22px"
+              : "35px",
+            borderRadius: "30px",
             border: "1px solid #222",
           }}
         >
@@ -462,232 +463,13 @@ export default function BookingPage() {
           <h2
             style={{
               textAlign: "center",
-              marginBottom: "25px",
+              marginBottom: "35px",
               fontSize:
-                isMobile ? "28px" : "35px",
+                isMobile ? "32px" : "42px",
             }}
           >
             Booking Summary
           </h2>
-
-          <p style={{ fontSize: "22px" }}>
-            🪑 Table:
-            <strong>
-              {" "}
-              {selectedTable.id}
-            </strong>
-          </p>
-
-          <p style={{ fontSize: "22px" }}>
-            💰 Price Per Person:
-            <strong>
-              {" "}
-              35,000 IQD
-            </strong>
-          </p>
-
-          <p style={{ fontSize: "22px" }}>
-            🧾 Total Price:
-            <strong>
-              {" "}
-              {Number(guests || 0) *
-                PRICE_PER_PERSON}
-              {" "}
-              IQD
-            </strong>
-          </p>
-
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
-            style={{
-              width: "100%",
-              padding: "15px",
-              marginTop: "20px",
-              marginBottom: "15px",
-              borderRadius: "12px",
-              border: "1px solid #333",
-              background: "#1a1a1a",
-              color: "white",
-            }}
-          />
-
-          <input
-            type="text"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={(e) =>
-              setPhone(e.target.value)
-            }
-            style={{
-              width: "100%",
-              padding: "15px",
-              marginBottom: "15px",
-              borderRadius: "12px",
-              border: "1px solid #333",
-              background: "#1a1a1a",
-              color: "white",
-            }}
-          />
-
-          <input
-            type="number"
-            placeholder="Guests Count"
-            value={guests}
-            onChange={(e) =>
-              setGuests(e.target.value)
-            }
-            style={{
-              width: "100%",
-              padding: "15px",
-              marginBottom: "15px",
-              borderRadius: "12px",
-              border: "1px solid #333",
-              background: "#1a1a1a",
-              color: "white",
-            }}
-          />
-
-          <textarea
-            placeholder="Notes"
-            rows="4"
-            value={notes}
-            onChange={(e) =>
-              setNotes(e.target.value)
-            }
-            style={{
-              width: "100%",
-              padding: "15px",
-              marginBottom: "20px",
-              borderRadius: "12px",
-              border: "1px solid #333",
-              background: "#1a1a1a",
-              color: "white",
-              resize: "none",
-            }}
-          />
-
-          <button
-            onClick={handleBooking}
-            style={{
-              width: "100%",
-              padding: "18px",
-              background: "#d4a017",
-              border: "none",
-              borderRadius: "15px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontSize: "20px",
-              color: "#000",
-            }}
-          >
-            Save Booking
-          </button>
-
-        </div>
-
-      )}
-
-      {/* QR CODE */}
-
-      {showQR && selectedTable && (
-
-        <div
-          style={{
-            width: isMobile ? "100%" : "500px",
-            margin: "40px auto",
-            background: "#111",
-            padding: "30px",
-            borderRadius: "25px",
-            textAlign: "center",
-            border: "1px solid #222",
-          }}
-        >
-
-          <h2
-            style={{
-              marginBottom: "20px",
-              fontSize:
-                isMobile ? "28px" : "35px",
-            }}
-          >
-            Your Ticket
-          </h2>
-
-          <p
-            style={{
-              fontSize:
-                isMobile ? "18px" : "22px",
-
-              marginBottom: "25px",
-
-              color: "#ccc",
-
-              lineHeight: "35px",
-            }}
-          >
-            🎉 شكراً لحجزك معنا
-            <br />
-            يرجى إبراز رمز الدخول عند باب الحفل
-          </p>
-
-          <div
-            style={{
-              background: "white",
-              padding: "20px",
-              borderRadius: "20px",
-              display: "inline-block",
-            }}
-          >
-
-            <QRCodeCanvas
-              value={`
-Name: ${name}
-Table: ${selectedTable.id}
-Guests: ${guests}
-`}
-              size={220}
-            />
-
-          </div>
-
-          <div
-            style={{
-              marginTop: "30px",
-              textAlign: "left",
-              background: "#1a1a1a",
-              padding: "20px",
-              borderRadius: "18px",
-            }}
-          >
-
-            <p style={{ fontSize: "20px" }}>
-              👤 Name: {name}
-            </p>
-
-            <p style={{ fontSize: "20px" }}>
-              🪑 Table:
-              {" "}
-              {selectedTable.id}
-            </p>
-
-            <p style={{ fontSize: "20px" }}>
-              👥 Guests:
-              {" "}
-              {guests}
-            </p>
-
-            <p style={{ fontSize: "20px" }}>
-              📞 Phone:
-              {" "}
-              {phone}
-            </p>
-
-          </div>
 
         </div>
 
