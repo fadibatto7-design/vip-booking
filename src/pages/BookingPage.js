@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { db } from "../firebase";
 
 import {
@@ -17,24 +16,28 @@ export default function BookingPage() {
 
   const isMobile = window.innerWidth < 768;
 
-  const tables = [
-
+  const leftTopTables = [
     "L1","L2","L3","L4",
     "L5","L6","L7","L8",
     "L9","L10","L11","L12",
     "L13","L14","L15","L16",
+  ];
 
+  const rightTopTables = [
     "R1","R2","R3","R4",
     "R5","R6","R7","R8",
     "R9","R10","R11","R12",
     "R13","R14","R15","R16",
+  ];
 
+  const leftBottomTables = [
     "L17","L18","L19","L20",
     "L21","L22","L23","L24",
+  ];
 
+  const rightBottomTables = [
     "R17","R18","R19","R20",
     "R21","R22","R23","R24",
-
   ];
 
   const [selectedTable, setSelectedTable] =
@@ -44,15 +47,15 @@ export default function BookingPage() {
     useState([]);
 
   const [name, setName] = useState("");
-
   const [phone, setPhone] = useState("");
-
   const [guests, setGuests] = useState(1);
-
   const [notes, setNotes] = useState("");
 
   const [showTicket, setShowTicket] =
     useState(false);
+
+  const [ticketData, setTicketData] =
+    useState(null);
 
   useEffect(() => {
 
@@ -92,39 +95,47 @@ export default function BookingPage() {
       !phone ||
       !selectedTable
     ) {
-
       alert("Please fill all fields");
-
       return;
-
     }
 
     try {
 
+      const bookingData = {
+
+        table: selectedTable,
+        customerName: name,
+        phone: phone,
+        guests: Number(guests),
+        notes: notes,
+
+        totalPrice:
+          Number(guests) *
+          PRICE_PER_PERSON,
+
+        createdAt: new Date(),
+
+      };
+
       await addDoc(
         collection(db, "bookings"),
-        {
-
-          table: selectedTable,
-
-          customerName: name,
-
-          phone: phone,
-
-          guests: Number(guests),
-
-          notes: notes,
-
-          totalPrice:
-            Number(guests) *
-            PRICE_PER_PERSON,
-
-          createdAt: new Date(),
-
-        }
+        bookingData
       );
 
+      setTicketData(bookingData);
+
       setShowTicket(true);
+
+      setName("");
+      setPhone("");
+      setGuests(1);
+      setNotes("");
+      setSelectedTable(null);
+
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
 
     } catch (error) {
 
@@ -148,29 +159,24 @@ export default function BookingPage() {
 
       <div
         key={table}
-
         onClick={() => {
 
           if (!isBooked) {
-
             setSelectedTable(table);
-
           }
 
         }}
-
         style={{
 
-          width: isMobile ? 45 : 70,
+          width: isMobile ? 60 : 70,
+          height: isMobile ? 60 : 70,
 
-          height: isMobile ? 45 : 70,
+          minWidth: isMobile ? 60 : 70,
 
-          borderRadius: 12,
+          borderRadius: 14,
 
           display: "flex",
-
           alignItems: "center",
-
           justifyContent: "center",
 
           cursor:
@@ -181,7 +187,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 12 : 18,
+            isMobile ? 18 : 18,
 
           color: "white",
 
@@ -190,7 +196,7 @@ export default function BookingPage() {
               ? "#d4a017"
               : isBooked
               ? "#7a1010"
-              : "#0d2b0d",
+              : "#062b06",
 
           border: `2px solid ${
             selectedTable === table
@@ -204,15 +210,11 @@ export default function BookingPage() {
             selectedTable === table
               ? "0 0 15px gold"
               : isBooked
-              ? "0 0 10px red"
-              : "0 0 10px #39ff14",
-
+              ? "0 0 15px red"
+              : "0 0 15px #39ff14",
         }}
-
       >
-
         {table}
-
       </div>
 
     );
@@ -226,7 +228,9 @@ export default function BookingPage() {
         background: "#050505",
         minHeight: "100vh",
         color: "white",
-        padding: isMobile ? 15 : 25,
+        padding: isMobile
+          ? "15px"
+          : "25px",
         fontFamily: "Arial",
       }}
     >
@@ -239,10 +243,16 @@ export default function BookingPage() {
           border: "1px solid #1f1f1f",
           borderRadius: 25,
           padding: isMobile ? 20 : 30,
+
           display: "flex",
+
           flexDirection:
-            isMobile ? "column" : "row",
+            isMobile
+              ? "column"
+              : "row",
+
           gap: 25,
+
           marginBottom: 25,
         }}
       >
@@ -252,10 +262,17 @@ export default function BookingPage() {
           alt=""
           style={{
             width:
-              isMobile ? "100%" : 160,
+              isMobile
+                ? "100%"
+                : 160,
+
             height:
-              isMobile ? 240 : 230,
+              isMobile
+                ? 240
+                : 230,
+
             objectFit: "cover",
+
             borderRadius: 20,
           }}
         />
@@ -265,49 +282,39 @@ export default function BookingPage() {
           <h1
             style={{
               fontSize:
-                isMobile ? 38 : 55,
+                isMobile
+                  ? 38
+                  : 55,
+
               marginBottom: 20,
             }}
           >
             Music No1 VIP Party
           </h1>
 
-          <p
-            style={{
-              fontSize:
-                isMobile ? 18 : 28,
-              color: "#ccc",
-            }}
-          >
+          <p style={infoStyle}>
             📅 Friday, 20 June 2026
           </p>
 
-          <p
-            style={{
-              fontSize:
-                isMobile ? 18 : 28,
-              color: "#ccc",
-            }}
-          >
+          <p style={infoStyle}>
             🕒 10:00 PM - 3:00 AM
           </p>
 
-          <p
-            style={{
-              fontSize:
-                isMobile ? 18 : 28,
-              color: "#ccc",
-            }}
-          >
+          <p style={infoStyle}>
             📍 Baghdad Grand Hall
           </p>
 
           <p
             style={{
               fontSize:
-                isMobile ? 24 : 32,
+                isMobile
+                  ? 24
+                  : 32,
+
               color: "#39ff14",
+
               fontWeight: "bold",
+
               marginTop: 20,
             }}
           >
@@ -329,7 +336,7 @@ export default function BookingPage() {
           border: "1px solid #1f1f1f",
           padding: isMobile ? 15 : 25,
           marginBottom: 25,
-          overflowX: "auto",
+          overflow: "hidden",
         }}
       >
 
@@ -338,16 +345,30 @@ export default function BookingPage() {
         <div
           style={{
             width:
-              isMobile ? "95%" : "50%",
+              isMobile
+                ? "90%"
+                : "50%",
+
             margin: "0 auto",
+
             padding: 20,
+
             borderRadius: 20,
-            border: "2px solid #c14cff",
+
+            border:
+              "2px solid #c14cff",
+
             textAlign: "center",
+
             fontSize:
-              isMobile ? 24 : 40,
+              isMobile
+                ? 24
+                : 40,
+
             fontWeight: "bold",
+
             marginBottom: 40,
+
             background: "#1a1025",
           }}
         >
@@ -360,45 +381,39 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 15 : 40,
-            flexWrap: "wrap",
+            gap: isMobile ? 40 : 90,
+            marginBottom: 40,
           }}
         >
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                isMobile
-                  ? "repeat(3,1fr)"
-                  : "repeat(4,1fr)",
-              gap: isMobile ? 12 : 20,
-            }}
-          >
-            {tables
-              .filter((t) =>
-                t.startsWith("L")
-              )
-              .slice(0, 16)
-              .map(renderTable)}
-          </div>
+          {/* LEFT */}
 
           <div
             style={{
               display: "grid",
+
               gridTemplateColumns:
-                isMobile
-                  ? "repeat(3,1fr)"
-                  : "repeat(4,1fr)",
-              gap: isMobile ? 12 : 20,
+                "repeat(4,1fr)",
+
+              gap: isMobile ? 14 : 20,
             }}
           >
-            {tables
-              .filter((t) =>
-                t.startsWith("R")
-              )
-              .slice(0, 16)
-              .map(renderTable)}
+            {leftTopTables.map(renderTable)}
+          </div>
+
+          {/* RIGHT */}
+
+          <div
+            style={{
+              display: "grid",
+
+              gridTemplateColumns:
+                "repeat(4,1fr)",
+
+              gap: isMobile ? 14 : 20,
+            }}
+          >
+            {rightTopTables.map(renderTable)}
           </div>
 
         </div>
@@ -408,15 +423,24 @@ export default function BookingPage() {
         <div
           style={{
             textAlign: "center",
+
             margin: "40px 0",
+
             fontSize:
-              isMobile ? 28 : 40,
+              isMobile
+                ? 28
+                : 40,
+
             color: "#c14cff",
+
             fontWeight: "bold",
+
             borderTop:
               "2px solid #c14cff",
+
             borderBottom:
               "2px solid #c14cff",
+
             padding: 15,
           }}
         >
@@ -429,45 +453,38 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 15 : 40,
-            flexWrap: "wrap",
+            gap: isMobile ? 40 : 90,
           }}
         >
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                isMobile
-                  ? "repeat(3,1fr)"
-                  : "repeat(4,1fr)",
-              gap: isMobile ? 12 : 20,
-            }}
-          >
-            {tables
-              .filter((t) =>
-                t.startsWith("L")
-              )
-              .slice(16)
-              .map(renderTable)}
-          </div>
+          {/* LEFT */}
 
           <div
             style={{
               display: "grid",
+
               gridTemplateColumns:
-                isMobile
-                  ? "repeat(3,1fr)"
-                  : "repeat(4,1fr)",
-              gap: isMobile ? 12 : 20,
+                "repeat(4,1fr)",
+
+              gap: isMobile ? 14 : 20,
             }}
           >
-            {tables
-              .filter((t) =>
-                t.startsWith("R")
-              )
-              .slice(16)
-              .map(renderTable)}
+            {leftBottomTables.map(renderTable)}
+          </div>
+
+          {/* RIGHT */}
+
+          <div
+            style={{
+              display: "grid",
+
+              gridTemplateColumns:
+                "repeat(4,1fr)",
+
+              gap: isMobile ? 14 : 20,
+            }}
+          >
+            {rightBottomTables.map(renderTable)}
           </div>
 
         </div>
@@ -481,35 +498,56 @@ export default function BookingPage() {
           background: "#0b0b0b",
           borderRadius: 25,
           border: "1px solid #1f1f1f",
-          padding: isMobile ? 20 : 35,
+          padding:
+            isMobile
+              ? 20
+              : 35,
         }}
       >
 
         <h2
           style={{
             fontSize:
-              isMobile ? 30 : 45,
+              isMobile
+                ? 30
+                : 45,
+
             marginBottom: 30,
           }}
         >
           Booking Summary
         </h2>
 
+        {/* Selected */}
+
         <div
           style={{
             border:
               "1px solid #39ff14",
+
             borderRadius: 15,
+
             padding: 18,
+
             marginBottom: 25,
+
             display: "flex",
+
             justifyContent:
               "space-between",
+
             alignItems: "center",
           }}
         >
 
-          <span>
+          <span
+            style={{
+              fontSize:
+                isMobile
+                  ? 16
+                  : 22,
+            }}
+          >
             🪑 Selected Table:
           </span>
 
@@ -517,6 +555,11 @@ export default function BookingPage() {
             style={{
               color: "#39ff14",
               fontWeight: "bold",
+
+              fontSize:
+                isMobile
+                  ? 18
+                  : 24,
             }}
           >
             {selectedTable || "--"}
@@ -544,6 +587,8 @@ export default function BookingPage() {
           style={inputStyle}
         />
 
+        {/* GUESTS */}
+
         <div
           style={{
             display: "flex",
@@ -556,11 +601,7 @@ export default function BookingPage() {
             onClick={() => {
 
               if (guests > 1) {
-
-                setGuests(
-                  guests - 1
-                );
-
+                setGuests(guests - 1);
               }
 
             }}
@@ -572,13 +613,20 @@ export default function BookingPage() {
           <div
             style={{
               flex: 1,
+
               background: "#111",
+
               border:
                 "1px solid #333",
+
               borderRadius: 15,
+
               display: "flex",
+
               alignItems: "center",
+
               justifyContent: "center",
+
               fontSize: 26,
             }}
           >
@@ -587,9 +635,7 @@ export default function BookingPage() {
 
           <button
             onClick={() =>
-              setGuests(
-                guests + 1
-              )
+              setGuests(guests + 1)
             }
             style={countBtn}
           >
@@ -611,18 +657,90 @@ export default function BookingPage() {
           }}
         />
 
+        {/* PRICE */}
+
+        <div
+          style={{
+            background: "#111",
+
+            borderRadius: 20,
+
+            padding: 25,
+
+            display: "flex",
+
+            justifyContent:
+              "space-between",
+
+            marginBottom: 25,
+          }}
+        >
+
+          <div>
+
+            <p
+              style={{
+                color: "#aaa",
+                marginBottom: 10,
+              }}
+            >
+              Price Per Person
+            </p>
+
+            <h2>
+              35,000 IQD
+            </h2>
+
+          </div>
+
+          <div>
+
+            <p
+              style={{
+                color: "#aaa",
+                marginBottom: 10,
+              }}
+            >
+              Total Price
+            </p>
+
+            <h2
+              style={{
+                color: "#39ff14",
+              }}
+            >
+              {guests *
+                PRICE_PER_PERSON}
+              {" "}
+              IQD
+            </h2>
+
+          </div>
+
+        </div>
+
         <button
           onClick={handleBooking}
           style={{
             width: "100%",
+
             padding: 22,
+
             borderRadius: 18,
+
             border: "none",
+
             background: "#d4a017",
+
             color: "#000",
+
             fontSize:
-              isMobile ? 20 : 26,
+              isMobile
+                ? 20
+                : 26,
+
             fontWeight: "bold",
+
             cursor: "pointer",
           }}
         >
@@ -633,115 +751,74 @@ export default function BookingPage() {
 
       {/* TICKET */}
 
-      {showTicket && (
+      {showTicket && ticketData && (
 
         <div
           style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100vh",
-            background:
-              "rgba(0,0,0,0.85)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 9999,
-            padding: 20,
+            marginTop: 30,
+
+            background: "#0b0b0b",
+
+            borderRadius: 25,
+
+            border: "1px solid #1f1f1f",
+
+            padding: 30,
+
+            textAlign: "center",
           }}
         >
 
+          <h1
+            style={{
+              color: "#39ff14",
+              marginBottom: 20,
+            }}
+          >
+            Booking Confirmed ✅
+          </h1>
+
+          <h2
+            style={{
+              color: "#ccc",
+              marginBottom: 15,
+            }}
+          >
+            Thank you for your booking
+          </h2>
+
+          <p style={ticketText}>
+            Name:
+            {" "}
+            {ticketData.customerName}
+          </p>
+
+          <p style={ticketText}>
+            Table:
+            {" "}
+            {ticketData.table}
+          </p>
+
+          <p style={ticketText}>
+            Guests:
+            {" "}
+            {ticketData.guests}
+          </p>
+
           <div
             style={{
-              background: "#0b0b0b",
-              borderRadius: 25,
-              width:
-                isMobile
-                  ? "100%"
-                  : 450,
-              padding:
-                isMobile
-                  ? 20
-                  : 35,
-              textAlign: "center",
+              background: "white",
+              padding: 20,
+              borderRadius: 20,
+              display: "inline-block",
+              marginTop: 20,
             }}
           >
 
-            <h2
-              style={{
-                color: "#39ff14",
-                marginBottom: 20,
-              }}
-            >
-              Booking Confirmed ✅
-            </h2>
-
-            <p
-              style={{
-                marginBottom: 10,
-              }}
-            >
-              Name: {name}
-            </p>
-
-            <p
-              style={{
-                marginBottom: 10,
-              }}
-            >
-              Table: {selectedTable}
-            </p>
-
-            <p
-              style={{
-                marginBottom: 25,
-              }}
-            >
-              Guests: {guests}
-            </p>
-
-            <div
-              style={{
-                background: "white",
-                padding: 15,
-                borderRadius: 20,
-                width: "fit-content",
-                margin: "0 auto",
-              }}
-            >
-
-              <QRCodeCanvas
-                value={`
-VIP BOOKING
-Name: ${name}
-Table: ${selectedTable}
-Guests: ${guests}
-Phone: ${phone}
-`}
-                size={220}
-              />
-
-            </div>
-
-            <button
-              onClick={() =>
-                setShowTicket(false)
-              }
-              style={{
-                marginTop: 25,
-                width: "100%",
-                padding: 18,
-                border: "none",
-                borderRadius: 15,
-                background: "#d4a017",
-                color: "#000",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Close
-            </button>
+            <QRCodeCanvas
+              value={JSON.stringify(ticketData)}
+              size={220}
+            />
 
           </div>
 
@@ -754,6 +831,18 @@ Phone: ${phone}
   );
 
 }
+
+const infoStyle = {
+  fontSize: 22,
+  color: "#ccc",
+  marginBottom: 10,
+};
+
+const ticketText = {
+  fontSize: 24,
+  color: "#ddd",
+  marginBottom: 10,
+};
 
 const inputStyle = {
 
@@ -776,7 +865,6 @@ const inputStyle = {
   outline: "none",
 
   boxSizing: "border-box",
-
 };
 
 const countBtn = {
@@ -796,5 +884,4 @@ const countBtn = {
   fontSize: 30,
 
   cursor: "pointer",
-
 };
