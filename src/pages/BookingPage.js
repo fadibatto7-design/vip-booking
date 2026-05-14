@@ -132,11 +132,6 @@ export default function BookingPage() {
       setNotes("");
       setSelectedTable(null);
 
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
-
     } catch (error) {
 
       console.log(error);
@@ -168,10 +163,10 @@ export default function BookingPage() {
         }}
         style={{
 
-          width: isMobile ? 60 : 70,
-          height: isMobile ? 60 : 70,
+          width: isMobile ? 42 : 70,
+          height: isMobile ? 42 : 70,
 
-          minWidth: isMobile ? 60 : 70,
+          minWidth: isMobile ? 42 : 70,
 
           borderRadius: 14,
 
@@ -187,7 +182,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 18 : 18,
+            isMobile ? 13 : 18,
 
           color: "white",
 
@@ -381,7 +376,7 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 40 : 90,
+            gap: isMobile ? 25 : 90,
             marginBottom: 40,
           }}
         >
@@ -395,7 +390,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 14 : 20,
+              gap: isMobile ? 12 : 20,
             }}
           >
             {leftTopTables.map(renderTable)}
@@ -410,7 +405,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 14 : 20,
+              gap: isMobile ? 12 : 20,
             }}
           >
             {rightTopTables.map(renderTable)}
@@ -453,7 +448,7 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 40 : 90,
+            gap: isMobile ? 25 : 90,
           }}
         >
 
@@ -466,7 +461,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 14 : 20,
+              gap: isMobile ? 12 : 20,
             }}
           >
             {leftBottomTables.map(renderTable)}
@@ -481,7 +476,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 14 : 20,
+              gap: isMobile ? 12 : 20,
             }}
           >
             {rightBottomTables.map(renderTable)}
@@ -517,8 +512,6 @@ export default function BookingPage() {
         >
           Booking Summary
         </h2>
-
-        {/* Selected */}
 
         <div
           style={{
@@ -749,76 +742,125 @@ export default function BookingPage() {
 
       </div>
 
-      {/* TICKET */}
+      {/* QR POPUP */}
 
       {showTicket && ticketData && (
 
         <div
           style={{
-            marginTop: 30,
-
-            background: "#0b0b0b",
-
-            borderRadius: 25,
-
-            border: "1px solid #1f1f1f",
-
-            padding: 30,
-
-            textAlign: "center",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100vh",
+            background: "rgba(0,0,0,0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+            padding: 20,
           }}
         >
 
-          <h1
-            style={{
-              color: "#39ff14",
-              marginBottom: 20,
-            }}
-          >
-            Booking Confirmed ✅
-          </h1>
-
-          <h2
-            style={{
-              color: "#ccc",
-              marginBottom: 15,
-            }}
-          >
-            Thank you for your booking
-          </h2>
-
-          <p style={ticketText}>
-            Name:
-            {" "}
-            {ticketData.customerName}
-          </p>
-
-          <p style={ticketText}>
-            Table:
-            {" "}
-            {ticketData.table}
-          </p>
-
-          <p style={ticketText}>
-            Guests:
-            {" "}
-            {ticketData.guests}
-          </p>
-
           <div
             style={{
-              background: "white",
-              padding: 20,
-              borderRadius: 20,
-              display: "inline-block",
-              marginTop: 20,
+              width: "100%",
+              maxWidth: 420,
+              background: "#050505",
+              borderRadius: 30,
+              padding: 30,
+              textAlign: "center",
+              border: "1px solid #222",
             }}
           >
 
-            <QRCodeCanvas
-              value={JSON.stringify(ticketData)}
-              size={220}
-            />
+            <div
+              style={{
+                fontSize: 80,
+                marginBottom: 10,
+              }}
+            >
+              ✅
+            </div>
+
+            <h1
+              style={{
+                color: "#39ff14",
+                fontSize: 40,
+                marginBottom: 20,
+              }}
+            >
+              Thank You!
+            </h1>
+
+            <p
+              style={{
+                color: "white",
+                fontSize: 24,
+                marginBottom: 10,
+              }}
+            >
+              نتمنى لكم حفلة جميلة
+            </p>
+
+            <p
+              style={{
+                color: "#39ff14",
+                fontSize: 22,
+                marginBottom: 25,
+              }}
+            >
+              يرجى إظهار QR عند مدخل القاعة
+            </p>
+
+            <div
+              style={{
+                background: "white",
+                padding: 18,
+                borderRadius: 25,
+                width: "fit-content",
+                margin: "0 auto 25px",
+              }}
+            >
+
+              <QRCodeCanvas
+                value={JSON.stringify(ticketData)}
+                size={220}
+              />
+
+            </div>
+
+            <p style={ticketText}>
+              👤 {ticketData.customerName}
+            </p>
+
+            <p style={ticketText}>
+              🪑 {ticketData.table}
+            </p>
+
+            <p style={ticketText}>
+              👥 {ticketData.guests}
+            </p>
+
+            <button
+              onClick={() =>
+                setShowTicket(false)
+              }
+              style={{
+                width: "100%",
+                padding: 18,
+                borderRadius: 18,
+                border: "none",
+                background: "#d4a017",
+                color: "#000",
+                fontSize: 22,
+                fontWeight: "bold",
+                cursor: "pointer",
+                marginTop: 25,
+              }}
+            >
+              Close
+            </button>
 
           </div>
 
@@ -839,7 +881,7 @@ const infoStyle = {
 };
 
 const ticketText = {
-  fontSize: 24,
+  fontSize: 22,
   color: "#ddd",
   marginBottom: 10,
 };
