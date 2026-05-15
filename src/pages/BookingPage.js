@@ -107,7 +107,7 @@ export default function BookingPage() {
         customerName: name,
         phone: phone,
         guests: Number(guests),
-        notes: notes,
+        
 
         totalPrice:
           Number(guests) *
@@ -129,7 +129,7 @@ export default function BookingPage() {
       setName("");
       setPhone("");
       setGuests(1);
-      setNotes("");
+    
       setSelectedTable(null);
 
     } catch (error) {
@@ -284,19 +284,19 @@ export default function BookingPage() {
               marginBottom: 20,
             }}
           >
-            Music No1 VIP Party
+            Music No.1 girls Party
           </h1>
 
           <p style={infoStyle}>
-            📅 Friday, 20 June 2026
+            📅 Friday, 29 May 2026
           </p>
 
           <p style={infoStyle}>
-            🕒 10:00 PM - 3:00 AM
+            🕒 07:00 PM - 11:00 PM
           </p>
 
           <p style={infoStyle}>
-            📍 Baghdad Grand Hall
+            📍 اغصان الزيتون-قاعة جواهر
           </p>
 
           <p
@@ -351,7 +351,7 @@ export default function BookingPage() {
             borderRadius: 20,
 
             border:
-              "2px solid #c14cff",
+              "2px solid #fa0909",
 
             textAlign: "center",
 
@@ -426,15 +426,15 @@ export default function BookingPage() {
                 ? 28
                 : 40,
 
-            color: "#c14cff",
+            color: "#ff0000",
 
             fontWeight: "bold",
 
             borderTop:
-              "2px solid #c14cff",
+              "2px solid #ff0000",
 
             borderBottom:
-              "2px solid #c14cff",
+              "2px solid #ff0000",
 
             padding: 15,
           }}
