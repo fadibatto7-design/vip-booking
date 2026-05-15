@@ -107,7 +107,6 @@ export default function BookingPage() {
         customerName: name,
         phone: phone,
         guests: Number(guests),
-        
 
         totalPrice:
           Number(guests) *
@@ -129,7 +128,7 @@ export default function BookingPage() {
       setName("");
       setPhone("");
       setGuests(1);
-    
+      setNotes("");
       setSelectedTable(null);
 
     } catch (error) {
@@ -163,12 +162,12 @@ export default function BookingPage() {
         }}
         style={{
 
-          width: isMobile ? 42 : 70,
-          height: isMobile ? 42 : 70,
+          width: isMobile ? 40 : 70,
+          height: isMobile ? 40 : 70,
 
-          minWidth: isMobile ? 42 : 70,
+          minWidth: isMobile ? 40 : 70,
 
-          borderRadius: 14,
+          borderRadius: 12,
 
           display: "flex",
           alignItems: "center",
@@ -182,7 +181,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 13 : 18,
+            isMobile ? 12 : 18,
 
           color: "white",
 
@@ -203,10 +202,10 @@ export default function BookingPage() {
 
           boxShadow:
             selectedTable === table
-              ? "0 0 15px gold"
+              ? "0 0 10px gold"
               : isBooked
-              ? "0 0 15px red"
-              : "0 0 15px #7014da",
+              ? "0 0 10px red"
+              : "0 0 10px #7014da",
         }}
       >
         {table}
@@ -224,7 +223,7 @@ export default function BookingPage() {
         minHeight: "100vh",
         color: "white",
         padding: isMobile
-          ? "15px"
+          ? "10px"
           : "25px",
         fontFamily: "Arial",
       }}
@@ -237,7 +236,7 @@ export default function BookingPage() {
           background: "#0b0b0b",
           border: "1px solid #1f1f1f",
           borderRadius: 25,
-          padding: isMobile ? 20 : 30,
+          padding: isMobile ? 15 : 30,
 
           display: "flex",
 
@@ -246,14 +245,14 @@ export default function BookingPage() {
               ? "column"
               : "row",
 
-          gap: 25,
+          gap: 20,
 
           marginBottom: 25,
         }}
       >
 
         <img
-          src="https://scontent.fbgw71-1.fna.fbcdn.net/v/t39.30808-6/654758322_1558448586284338_1742458694516777589_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGoB9HoW529NnaRFAwVCPEj4NHXMY4pB1Xg0dcxjikHVVMsx970tKof_rx9ePhw6SvVdoXfPeUJE-Z8qtSp0Vci&_nc_ohc=2M3IOED0RBEQ7kNvwGn4qxf&_nc_oc=Adqg4ihq7zx01hrKtbKhkH9EKzE6qSgtpEta0b1jNzmr5cI0dpDLRbzDCpSpo2YuQHo&_nc_zt=23&_nc_ht=scontent.fbgw71-1.fna&_nc_gid=CxxydWoDZsW3g0iIalU2Ag&_nc_ss=7b2a8&oh=00_Af6p-9ebncCocCKdeIEWKsnS2Sx70ZMft4Jilm1ojoUdcw&oe=6A0D24A8"
+          src="https://scontent.fbgw71-1.fna.fbcdn.net/v/t39.30808-6/654758322_1558448586284338_1742458694516777589_n.jpg"
           alt=""
           style={{
             width:
@@ -263,7 +262,7 @@ export default function BookingPage() {
 
             height:
               isMobile
-                ? 240
+                ? 180
                 : 230,
 
             objectFit: "cover",
@@ -278,7 +277,7 @@ export default function BookingPage() {
             style={{
               fontSize:
                 isMobile
-                  ? 38
+                  ? 30
                   : 55,
 
               marginBottom: 20,
@@ -303,10 +302,10 @@ export default function BookingPage() {
             style={{
               fontSize:
                 isMobile
-                  ? 24
+                  ? 18
                   : 32,
 
-              color: "#ff0000",
+              color: "#39ff14",
 
               fontWeight: "bold",
 
@@ -329,7 +328,7 @@ export default function BookingPage() {
           background: "#0b0b0b",
           borderRadius: 25,
           border: "1px solid #1f1f1f",
-          padding: isMobile ? 15 : 25,
+          padding: isMobile ? 12 : 25,
           marginBottom: 25,
           overflow: "hidden",
         }}
@@ -341,12 +340,12 @@ export default function BookingPage() {
           style={{
             width:
               isMobile
-                ? "90%"
+                ? "100%"
                 : "50%",
 
             margin: "0 auto",
 
-            padding: 20,
+            padding: 15,
 
             borderRadius: 20,
 
@@ -357,12 +356,12 @@ export default function BookingPage() {
 
             fontSize:
               isMobile
-                ? 24
+                ? 20
                 : 40,
 
             fontWeight: "bold",
 
-            marginBottom: 40,
+            marginBottom: 30,
 
             background: "#e00b0b",
           }}
@@ -376,12 +375,10 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 25 : 90,
-            marginBottom: 40,
+            gap: isMobile ? 18 : 90,
+            marginBottom: 30,
           }}
         >
-
-          {/* LEFT */}
 
           <div
             style={{
@@ -390,14 +387,12 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 12 : 20,
+              gap: isMobile ? 10 : 20,
             }}
           >
             {leftTopTables.map(renderTable)}
           </div>
 
-          {/* RIGHT */}
-
           <div
             style={{
               display: "grid",
@@ -405,7 +400,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 12 : 20,
+              gap: isMobile ? 10 : 20,
             }}
           >
             {rightTopTables.map(renderTable)}
@@ -419,11 +414,11 @@ export default function BookingPage() {
           style={{
             textAlign: "center",
 
-            margin: "40px 0",
+            margin: "30px 0",
 
             fontSize:
               isMobile
-                ? 28
+                ? 24
                 : 40,
 
             color: "#ff0000",
@@ -448,11 +443,9 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 25 : 90,
+            gap: isMobile ? 18 : 90,
           }}
         >
-
-          {/* LEFT */}
 
           <div
             style={{
@@ -461,14 +454,12 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 12 : 20,
+              gap: isMobile ? 10 : 20,
             }}
           >
             {leftBottomTables.map(renderTable)}
           </div>
 
-          {/* RIGHT */}
-
           <div
             style={{
               display: "grid",
@@ -476,7 +467,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 12 : 20,
+              gap: isMobile ? 10 : 20,
             }}
           >
             {rightBottomTables.map(renderTable)}
@@ -504,10 +495,10 @@ export default function BookingPage() {
           style={{
             fontSize:
               isMobile
-                ? 30
+                ? 24
                 : 45,
 
-            marginBottom: 30,
+            marginBottom: 25,
           }}
         >
           Booking Summary
@@ -520,9 +511,9 @@ export default function BookingPage() {
 
             borderRadius: 15,
 
-            padding: 18,
+            padding: 15,
 
-            marginBottom: 25,
+            marginBottom: 20,
 
             display: "flex",
 
@@ -537,7 +528,7 @@ export default function BookingPage() {
             style={{
               fontSize:
                 isMobile
-                  ? 16
+                  ? 14
                   : 22,
             }}
           >
@@ -551,7 +542,7 @@ export default function BookingPage() {
 
               fontSize:
                 isMobile
-                  ? 18
+                  ? 16
                   : 24,
             }}
           >
@@ -620,7 +611,7 @@ export default function BookingPage() {
 
               justifyContent: "center",
 
-              fontSize: 26,
+              fontSize: 24,
             }}
           >
             {guests}
@@ -658,7 +649,7 @@ export default function BookingPage() {
 
             borderRadius: 20,
 
-            padding: 25,
+            padding: 20,
 
             display: "flex",
 
@@ -675,12 +666,17 @@ export default function BookingPage() {
               style={{
                 color: "#aaa",
                 marginBottom: 10,
+                fontSize: isMobile ? 14 : 18,
               }}
             >
               Price Per Person
             </p>
 
-            <h2>
+            <h2
+              style={{
+                fontSize: isMobile ? 18 : 30,
+              }}
+            >
               35,000 IQD
             </h2>
 
@@ -692,6 +688,7 @@ export default function BookingPage() {
               style={{
                 color: "#aaa",
                 marginBottom: 10,
+                fontSize: isMobile ? 14 : 18,
               }}
             >
               Total Price
@@ -700,6 +697,7 @@ export default function BookingPage() {
             <h2
               style={{
                 color: "#39ff14",
+                fontSize: isMobile ? 18 : 30,
               }}
             >
               {guests *
@@ -717,19 +715,20 @@ export default function BookingPage() {
           style={{
             width: "100%",
 
-            padding: 22,
+            padding: 18,
 
             borderRadius: 18,
 
             border: "none",
 
-            background: "#d4a017",
+            background:
+              "linear-gradient(90deg,#d4a017,#f5c542)",
 
             color: "#000",
 
             fontSize:
               isMobile
-                ? 20
+                ? 18
                 : 26,
 
             fontWeight: "bold",
@@ -796,7 +795,7 @@ export default function BookingPage() {
             <p
               style={{
                 color: "white",
-                fontSize: 24,
+                fontSize: 22,
                 marginBottom: 10,
               }}
             >
@@ -806,11 +805,11 @@ export default function BookingPage() {
             <p
               style={{
                 color: "#39ff14",
-                fontSize: 22,
+                fontSize: 18,
                 marginBottom: 25,
               }}
             >
-             QR code for your tecket
+             يرجى إظهار QR عند المدخل
             </p>
 
             <div
@@ -875,13 +874,13 @@ export default function BookingPage() {
 }
 
 const infoStyle = {
-  fontSize: 22,
+  fontSize: 18,
   color: "#ccc",
   marginBottom: 10,
 };
 
 const ticketText = {
-  fontSize: 22,
+  fontSize: 20,
   color: "#ddd",
   marginBottom: 10,
 };
@@ -890,7 +889,7 @@ const inputStyle = {
 
   width: "100%",
 
-  padding: "18px",
+  padding: "16px",
 
   marginBottom: "20px",
 
@@ -902,7 +901,7 @@ const inputStyle = {
 
   color: "white",
 
-  fontSize: "18px",
+  fontSize: "16px",
 
   outline: "none",
 
@@ -911,9 +910,9 @@ const inputStyle = {
 
 const countBtn = {
 
-  width: 70,
+  width: 60,
 
-  height: 60,
+  height: 55,
 
   borderRadius: 15,
 
@@ -923,7 +922,7 @@ const countBtn = {
 
   color: "white",
 
-  fontSize: 30,
+  fontSize: 26,
 
   cursor: "pointer",
 };
