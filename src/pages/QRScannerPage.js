@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { QrReader } from "react-qr-reader";
+import { Html5QrcodeScanner }
+from "html5-qrcode";
 
 export default function QRScannerPage() {
 
@@ -9,6 +10,51 @@ export default function QRScannerPage() {
 
   const [invalidQR, setInvalidQR] =
     useState(false);
+
+  useEffect(() => {
+
+    const scanner =
+      new Html5QrcodeScanner(
+        "reader",
+        {
+          fps: 10,
+          qrbox: 250,
+        },
+        false
+      );
+
+    scanner.render(
+
+      (decodedText) => {
+
+        try {
+
+          const parsed =
+            JSON.parse(decodedText);
+
+          setTicketData(parsed);
+
+          setInvalidQR(false);
+
+        } catch {
+
+          setInvalidQR(true);
+
+        }
+
+      },
+
+      (error) => {
+        console.log(error);
+      }
+
+    );
+
+    return () => {
+      scanner.clear().catch(() => {});
+    };
+
+  }, []);
 
   return (
 
@@ -22,20 +68,17 @@ export default function QRScannerPage() {
       }}
     >
 
-      {/* TITLE */}
-
       <h1
         style={{
           textAlign: "center",
+          fontSize: "50px",
           marginBottom: "30px",
-          fontSize: "45px",
-          fontWeight: "bold",
         }}
       >
         QR Ticket Scanner
       </h1>
 
-      {/* SCANNER BOX */}
+      {/* CAMERA */}
 
       <div
         style={{
@@ -44,44 +87,17 @@ export default function QRScannerPage() {
           background: "#111",
           padding: "20px",
           borderRadius: "25px",
-          border: "1px solid #1f1f1f",
-          overflow: "hidden",
+          border: "1px solid #222",
         }}
       >
 
-        <QrReader
-
-          constraints={{
-            facingMode: "environment",
-          }}
-
-          onResult={(result) => {
-
-            if (!!result) {
-
-              try {
-
-                const parsedData =
-                  JSON.parse(result?.text);
-
-                setTicketData(parsedData);
-
-                setInvalidQR(false);
-
-              } catch (error) {
-
-                setInvalidQR(true);
-
-              }
-
-            }
-
-          }}
-
+        <div
+          id="reader"
           style={{
             width: "100%",
+            overflow: "hidden",
+            borderRadius: "20px",
           }}
-
         />
 
       </div>
@@ -96,18 +112,14 @@ export default function QRScannerPage() {
             margin: "30px auto",
             background: "#2b0606",
             border: "1px solid red",
-            padding: "25px",
+            padding: "20px",
             borderRadius: "20px",
             textAlign: "center",
           }}
         >
 
-          <h2
-            style={{
-              color: "red",
-            }}
-          >
-            Invalid QR Code ❌
+          <h2 style={{ color: "red" }}>
+            Invalid QR ❌
           </h2>
 
         </div>
@@ -125,57 +137,51 @@ export default function QRScannerPage() {
             background: "#111",
             padding: "35px",
             borderRadius: "25px",
-            border: "1px solid #1f1f1f",
+            border: "1px solid #222",
           }}
         >
 
           <h2
             style={{
-              marginBottom: "25px",
               color: "#39ff14",
-              fontSize: "38px",
               textAlign: "center",
+              marginBottom: "25px",
+              fontSize: "40px",
             }}
           >
             VALID TICKET ✅
           </h2>
 
-          <div style={infoBox}>
+          <div style={infoStyle}>
             👤 Name:
             {" "}
             {ticketData.customerName}
           </div>
 
-          <div style={infoBox}>
+          <div style={infoStyle}>
             🪑 Table:
             {" "}
             {ticketData.table}
           </div>
 
-          <div style={infoBox}>
+          <div style={infoStyle}>
             👥 Guests:
             {" "}
             {ticketData.guests}
           </div>
 
-          <div style={infoBox}>
+          <div style={infoStyle}>
             📞 Phone:
             {" "}
             {ticketData.phone}
           </div>
 
-          <div style={infoBox}>
+          <div style={infoStyle}>
             💰 Total:
             {" "}
             {ticketData.totalPrice}
             {" "}
             IQD
-          </div>
-
-          <div style={infoBox}>
-            📝 Notes:
-            {" "}
-            {ticketData.notes || "No Notes"}
           </div>
 
         </div>
@@ -188,20 +194,18 @@ export default function QRScannerPage() {
 
 }
 
-const infoBox = {
+const infoStyle = {
 
   background: "#0b0b0b",
 
-  border: "1px solid #222",
+  padding: "18px",
 
   borderRadius: "15px",
-
-  padding: "18px",
 
   marginBottom: "15px",
 
   fontSize: "22px",
 
-  color: "#ddd",
+  border: "1px solid #222",
 
 };
