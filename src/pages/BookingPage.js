@@ -253,7 +253,7 @@ export default function BookingPage() {
       >
 
         <img
-          src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
+          src="https://instagram.fbgw71-1.fna.fbcdn.net/v/t51.82787-19/655199611_17948590125117800_2488682144825279497_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fbgw71-1.fna.fbcdn.net&_nc_cat=108&_nc_oc=Q6cZ2gHnaGe5L0Zmwa7pabtWwZrNjjGuX4RuuF6m4Bxfhq2UBebDKJM7bFJfJn9t_TMAZ4g&_nc_ohc=4cQPEoVrT9QQ7kNvwGunGvq&_nc_gid=NhKqXbqjYkFQh9BDW_Yf-w&edm=AEYEu-QBAAAA&ccb=7-5&oh=00_Af7bQTXK0JP3wl2zekrM3AH6Nf_Z24oKGiBOy4XL33cA0A&oe=6A0D2B98&_nc_sid=ead929"
           alt=""
           style={{
             width:
@@ -364,7 +364,7 @@ export default function BookingPage() {
 
             marginBottom: 40,
 
-            background: "#1a1025",
+            background: "#e00b0b",
           }}
         >
           STAGE
