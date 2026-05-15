@@ -252,7 +252,7 @@ export default function BookingPage() {
       >
 
         <img
-          src="https://scontent.fbgw71-1.fna.fbcdn.net/v/t39.30808-6/654758322_1558448586284338_1742458694516777589_n.jpg"
+          src="https://drive.google.com/file/d/1C42t5sQ62VUXSdMQfQGGLgOU_IPS8VYa/view"
           alt=""
           style={{
             width:
