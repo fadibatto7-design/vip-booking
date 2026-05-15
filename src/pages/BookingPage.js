@@ -188,17 +188,17 @@ export default function BookingPage() {
 
           background:
             selectedTable === table
-              ? "#d4a017"
+              ? "#ffffff"
               : isBooked
-              ? "#7a1010"
-              : "#062b06",
+              ? "#b80d0d"
+              : "#0c0844",
 
           border: `2px solid ${
             selectedTable === table
-              ? "#ffd700"
+              ? "#ffffff"
               : isBooked
-              ? "#ff0000"
-              : "#39ff14"
+              ? "#cc0a0a"
+              : "#30099c"
           }`,
 
           boxShadow:
@@ -206,7 +206,7 @@ export default function BookingPage() {
               ? "0 0 15px gold"
               : isBooked
               ? "0 0 15px red"
-              : "0 0 15px #39ff14",
+              : "0 0 15px #7014da",
         }}
       >
         {table}
@@ -306,7 +306,7 @@ export default function BookingPage() {
                   ? 24
                   : 32,
 
-              color: "#39ff14",
+              color: "#ff0000",
 
               fontWeight: "bold",
 
