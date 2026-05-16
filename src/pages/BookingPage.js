@@ -865,9 +865,12 @@ export default function BookingPage() {
                 color: "#ff1414",
                 fontSize: isMobile ? 15 : 18,
                 marginBottom: "0 auto 18px",
+                direction: "rtl",
+                textAlign:"right"
               }}
             >
-              يرجى إظهار QR عند المدخل
+             عند الدخول يرجى إظهار QR Code
+
             </p>
 
             <div
