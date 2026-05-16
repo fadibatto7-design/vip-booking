@@ -820,11 +820,11 @@ export default function BookingPage() {
 
           <div
             style={{
-              width: "92%",
+              width: "88%",
               maxWidth: 320,
               background: "#050505",
-              borderRadius: 22,
-              padding: 16,
+              borderRadius: 26,
+              padding: 18,
               textAlign: "center",
               border: "1px solid #222",
             }}
@@ -832,7 +832,7 @@ export default function BookingPage() {
 
             <div
               style={{
-                fontSize: 70,
+                fontSize: 60,
                 marginBottom: 10,
               }}
             >
@@ -863,7 +863,7 @@ export default function BookingPage() {
               style={{
                 color: "#ff1414",
                 fontSize: isMobile ? 15 : 18,
-                marginBottom: 25,
+                marginBottom: "0 auto 18px",
               }}
             >
               يرجى إظهار QR عند المدخل
@@ -881,7 +881,7 @@ export default function BookingPage() {
 
               <QRCodeCanvas
                 value={JSON.stringify(ticketData)}
-                size={145}
+                size={130}
               />
 
             </div>
@@ -904,7 +904,7 @@ export default function BookingPage() {
               }
               style={{
                 width: "100%",
-                padding: 16,
+                padding: 13,
                 borderRadius: 18,
                 border: "none",
                 background: "#d4a017",
@@ -912,7 +912,7 @@ export default function BookingPage() {
                 fontSize: 20,
                 fontWeight: "bold",
                 cursor: "pointer",
-                marginTop: 25,
+                marginTop: 16,
               }}
             >
               Close
@@ -937,7 +937,7 @@ const infoStyle = {
 };
 
 const ticketText = {
-  fontSize: 18,
+  fontSize: 16,
   color: "#ddd",
   marginBottom: 10,
 };
