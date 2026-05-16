@@ -813,15 +813,16 @@ export default function BookingPage() {
             justifyContent: "center",
             alignItems: "center",
             zIndex: 9999,
-            padding: 20,
+            padding: "12px",
+            boxSizing: "border-box",
             overflowY: "auto",
           }}
         >
 
           <div
             style={{
-              width: "88%",
-              maxWidth: 320,
+              width: "100%",
+              maxWidth: 340,
               background: "#050505",
               borderRadius: 26,
               padding: 18,
