@@ -819,11 +819,11 @@ export default function BookingPage() {
 
           <div
             style={{
-              width: "100%",
-              maxWidth: 400,
+              width: "92%",
+              maxWidth: 320,
               background: "#050505",
-              borderRadius: 30,
-              padding: 25,
+              borderRadius: 22,
+              padding: 20,
               textAlign: "center",
               border: "1px solid #222",
             }}
@@ -840,7 +840,7 @@ export default function BookingPage() {
 
             <h1
               style={{
-                color: "#39ff14",
+                color: "#f0f3f0",
                 fontSize: isMobile ? 30 : 40,
                 marginBottom: 20,
               }}
@@ -860,7 +860,7 @@ export default function BookingPage() {
 
             <p
               style={{
-                color: "#39ff14",
+                color: "#ff1414",
                 fontSize: isMobile ? 15 : 18,
                 marginBottom: 25,
               }}
@@ -880,7 +880,7 @@ export default function BookingPage() {
 
               <QRCodeCanvas
                 value={JSON.stringify(ticketData)}
-                size={200}
+                size={160}
               />
 
             </div>
