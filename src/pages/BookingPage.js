@@ -162,12 +162,12 @@ export default function BookingPage() {
         }}
         style={{
 
-          width: isMobile ? 40 : 70,
-          height: isMobile ? 40 : 70,
+          width: isMobile ? 34 : 70,
+          height: isMobile ? 34 : 70,
 
-          minWidth: isMobile ? 40 : 70,
+          minWidth: isMobile ? 34 : 70,
 
-          borderRadius: 12,
+          borderRadius: 10,
 
           display: "flex",
           alignItems: "center",
@@ -181,7 +181,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 12 : 18,
+            isMobile ? 10 : 18,
 
           color: "white",
 
@@ -202,10 +202,10 @@ export default function BookingPage() {
 
           boxShadow:
             selectedTable === table
-              ? "0 0 10px gold"
+              ? "0 0 8px gold"
               : isBooked
-              ? "0 0 10px red"
-              : "0 0 10px #7014da",
+              ? "0 0 8px red"
+              : "0 0 8px #7014da",
         }}
       >
         {table}
@@ -223,7 +223,7 @@ export default function BookingPage() {
         minHeight: "100vh",
         color: "white",
         padding: isMobile
-          ? "10px"
+          ? "8px"
           : "25px",
         fontFamily: "Arial",
       }}
@@ -236,7 +236,7 @@ export default function BookingPage() {
           background: "#0b0b0b",
           border: "1px solid #1f1f1f",
           borderRadius: 25,
-          padding: isMobile ? 15 : 30,
+          padding: isMobile ? 12 : 30,
 
           display: "flex",
 
@@ -245,34 +245,32 @@ export default function BookingPage() {
               ? "column"
               : "row",
 
-          gap: 20,
+          gap: 12,
 
-          marginBottom: 25,
+          marginBottom: 20,
         }}
       >
 
-           <img
-           src="/logomusicno1.png"
-           alt=""
-            style={{
-           width: "100%",
+        <img
+          src="/logomusicno1.png"
+          alt=""
+          style={{
+            width: "100%",
 
-           height:
-            isMobile
-            ? 220
-            : 260,
-  
-           objectFit: "contain",
+            height:
+              isMobile
+                ? 180
+                : 260,
 
-           background: "#000",
+            objectFit: "contain",
 
-           borderRadius: 20,
+            background: "#000",
 
-           padding: 10,
-           }}
-      
-           />
+            borderRadius: 20,
 
+            padding: 8,
+          }}
+        />
 
         <div>
 
@@ -280,10 +278,10 @@ export default function BookingPage() {
             style={{
               fontSize:
                 isMobile
-                  ? 30
+                  ? 26
                   : 55,
 
-              marginBottom: 20,
+              marginBottom: 15,
             }}
           >
             Music No.1 girls Party
@@ -305,14 +303,14 @@ export default function BookingPage() {
             style={{
               fontSize:
                 isMobile
-                  ? 18
+                  ? 16
                   : 32,
 
               color: "#39ff14",
 
               fontWeight: "bold",
 
-              marginTop: 20,
+              marginTop: 15,
             }}
           >
             👥 Remaining Seats:
@@ -331,8 +329,8 @@ export default function BookingPage() {
           background: "#0b0b0b",
           borderRadius: 25,
           border: "1px solid #1f1f1f",
-          padding: isMobile ? 12 : 25,
-          marginBottom: 25,
+          padding: isMobile ? 10 : 25,
+          marginBottom: 20,
           overflow: "hidden",
         }}
       >
@@ -348,7 +346,7 @@ export default function BookingPage() {
 
             margin: "0 auto",
 
-            padding: 15,
+            padding: 12,
 
             borderRadius: 20,
 
@@ -359,12 +357,12 @@ export default function BookingPage() {
 
             fontSize:
               isMobile
-                ? 20
+                ? 18
                 : 40,
 
             fontWeight: "bold",
 
-            marginBottom: 30,
+            marginBottom: 20,
 
             background: "#e00b0b",
           }}
@@ -378,8 +376,8 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 18 : 90,
-            marginBottom: 30,
+            gap: isMobile ? 12 : 90,
+            marginBottom: 25,
           }}
         >
 
@@ -390,7 +388,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 10 : 20,
+              gap: isMobile ? 8 : 20,
             }}
           >
             {leftTopTables.map(renderTable)}
@@ -403,7 +401,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 10 : 20,
+              gap: isMobile ? 8 : 20,
             }}
           >
             {rightTopTables.map(renderTable)}
@@ -417,11 +415,11 @@ export default function BookingPage() {
           style={{
             textAlign: "center",
 
-            margin: "30px 0",
+            margin: "25px 0",
 
             fontSize:
               isMobile
-                ? 24
+                ? 20
                 : 40,
 
             color: "#ff0000",
@@ -434,7 +432,7 @@ export default function BookingPage() {
             borderBottom:
               "2px solid #ff0000",
 
-            padding: 15,
+            padding: 12,
           }}
         >
           ENTRANCE
@@ -446,7 +444,7 @@ export default function BookingPage() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: isMobile ? 18 : 90,
+            gap: isMobile ? 12 : 90,
           }}
         >
 
@@ -457,7 +455,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 10 : 20,
+              gap: isMobile ? 8 : 20,
             }}
           >
             {leftBottomTables.map(renderTable)}
@@ -470,7 +468,7 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 10 : 20,
+              gap: isMobile ? 8 : 20,
             }}
           >
             {rightBottomTables.map(renderTable)}
@@ -489,7 +487,7 @@ export default function BookingPage() {
           border: "1px solid #1f1f1f",
           padding:
             isMobile
-              ? 20
+              ? 18
               : 35,
         }}
       >
@@ -498,7 +496,7 @@ export default function BookingPage() {
           style={{
             fontSize:
               isMobile
-                ? 24
+                ? 22
                 : 45,
 
             marginBottom: 25,
@@ -514,7 +512,7 @@ export default function BookingPage() {
 
             borderRadius: 15,
 
-            padding: 15,
+            padding: 14,
 
             marginBottom: 20,
 
@@ -531,7 +529,7 @@ export default function BookingPage() {
             style={{
               fontSize:
                 isMobile
-                  ? 14
+                  ? 13
                   : 22,
             }}
           >
@@ -545,7 +543,7 @@ export default function BookingPage() {
 
               fontSize:
                 isMobile
-                  ? 16
+                  ? 15
                   : 24,
             }}
           >
@@ -614,7 +612,7 @@ export default function BookingPage() {
 
               justifyContent: "center",
 
-              fontSize: 24,
+              fontSize: 22,
             }}
           >
             {guests}
@@ -652,7 +650,7 @@ export default function BookingPage() {
 
             borderRadius: 20,
 
-            padding: 20,
+            padding: 18,
 
             display: "flex",
 
@@ -669,7 +667,7 @@ export default function BookingPage() {
               style={{
                 color: "#aaa",
                 marginBottom: 10,
-                fontSize: isMobile ? 14 : 18,
+                fontSize: isMobile ? 12 : 18,
               }}
             >
               Price Per Person
@@ -677,7 +675,7 @@ export default function BookingPage() {
 
             <h2
               style={{
-                fontSize: isMobile ? 18 : 30,
+                fontSize: isMobile ? 16 : 30,
               }}
             >
               35,000 IQD
@@ -691,7 +689,7 @@ export default function BookingPage() {
               style={{
                 color: "#aaa",
                 marginBottom: 10,
-                fontSize: isMobile ? 14 : 18,
+                fontSize: isMobile ? 12 : 18,
               }}
             >
               Total Price
@@ -700,7 +698,7 @@ export default function BookingPage() {
             <h2
               style={{
                 color: "#39ff14",
-                fontSize: isMobile ? 18 : 30,
+                fontSize: isMobile ? 16 : 30,
               }}
             >
               {guests *
@@ -718,7 +716,7 @@ export default function BookingPage() {
           style={{
             width: "100%",
 
-            padding: 18,
+            padding: 16,
 
             borderRadius: 18,
 
@@ -731,7 +729,7 @@ export default function BookingPage() {
 
             fontSize:
               isMobile
-                ? 18
+                ? 17
                 : 26,
 
             fontWeight: "bold",
@@ -767,10 +765,10 @@ export default function BookingPage() {
           <div
             style={{
               width: "100%",
-              maxWidth: 420,
+              maxWidth: 400,
               background: "#050505",
               borderRadius: 30,
-              padding: 30,
+              padding: 25,
               textAlign: "center",
               border: "1px solid #222",
             }}
@@ -778,7 +776,7 @@ export default function BookingPage() {
 
             <div
               style={{
-                fontSize: 80,
+                fontSize: 70,
                 marginBottom: 10,
               }}
             >
@@ -788,7 +786,7 @@ export default function BookingPage() {
             <h1
               style={{
                 color: "#39ff14",
-                fontSize: 40,
+                fontSize: isMobile ? 30 : 40,
                 marginBottom: 20,
               }}
             >
@@ -798,7 +796,7 @@ export default function BookingPage() {
             <p
               style={{
                 color: "white",
-                fontSize: 22,
+                fontSize: isMobile ? 18 : 22,
                 marginBottom: 10,
               }}
             >
@@ -808,17 +806,17 @@ export default function BookingPage() {
             <p
               style={{
                 color: "#39ff14",
-                fontSize: 18,
+                fontSize: isMobile ? 15 : 18,
                 marginBottom: 25,
               }}
             >
-             يرجى إظهار QR عند المدخل
+              يرجى إظهار QR عند المدخل
             </p>
 
             <div
               style={{
                 background: "white",
-                padding: 18,
+                padding: 15,
                 borderRadius: 25,
                 width: "fit-content",
                 margin: "0 auto 25px",
@@ -827,7 +825,7 @@ export default function BookingPage() {
 
               <QRCodeCanvas
                 value={JSON.stringify(ticketData)}
-                size={220}
+                size={200}
               />
 
             </div>
@@ -850,12 +848,12 @@ export default function BookingPage() {
               }
               style={{
                 width: "100%",
-                padding: 18,
+                padding: 16,
                 borderRadius: 18,
                 border: "none",
                 background: "#d4a017",
                 color: "#000",
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: "bold",
                 cursor: "pointer",
                 marginTop: 25,
@@ -877,13 +875,13 @@ export default function BookingPage() {
 }
 
 const infoStyle = {
-  fontSize: 18,
+  fontSize: 16,
   color: "#ccc",
   marginBottom: 10,
 };
 
 const ticketText = {
-  fontSize: 20,
+  fontSize: 18,
   color: "#ddd",
   marginBottom: 10,
 };
@@ -892,7 +890,7 @@ const inputStyle = {
 
   width: "100%",
 
-  padding: "16px",
+  padding: "15px",
 
   marginBottom: "20px",
 
@@ -904,7 +902,7 @@ const inputStyle = {
 
   color: "white",
 
-  fontSize: "16px",
+  fontSize: "15px",
 
   outline: "none",
 
@@ -913,9 +911,9 @@ const inputStyle = {
 
 const countBtn = {
 
-  width: 60,
+  width: 55,
 
-  height: 55,
+  height: 50,
 
   borderRadius: 15,
 
@@ -925,7 +923,7 @@ const countBtn = {
 
   color: "white",
 
-  fontSize: 26,
+  fontSize: 24,
 
   cursor: "pointer",
 };
