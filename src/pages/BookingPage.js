@@ -162,10 +162,10 @@ export default function BookingPage() {
         }}
         style={{
 
-          width: isMobile ? 34 : 70,
-          height: isMobile ? 34 : 70,
+          width: isMobile ? 30 : 70,
+          height: isMobile ? 30 : 70,
 
-          minWidth: isMobile ? 34 : 70,
+          minWidth: isMobile ? 30 : 70,
 
           borderRadius: 10,
 
@@ -181,7 +181,7 @@ export default function BookingPage() {
           fontWeight: "bold",
 
           fontSize:
-            isMobile ? 10 : 18,
+            isMobile ? 9 : 18,
 
           color:
             selectedTable === table
@@ -264,7 +264,7 @@ export default function BookingPage() {
           style={{
             width:
               isMobile
-                ? "88%"
+                ? "82%"
                 : 320,
 
             height:
@@ -356,12 +356,12 @@ export default function BookingPage() {
 
           padding:
             isMobile
-              ? 10
+              ? 6
               : 25,
 
           marginBottom: 20,
 
-          overflowX: "auto",
+          
 
           overflowY: "hidden",
         }}
@@ -373,7 +373,7 @@ export default function BookingPage() {
           style={{
             width:
               isMobile
-                ? "92%"
+                ? "88%"
                 : "55%",
 
             margin: "0 auto",
@@ -412,7 +412,7 @@ export default function BookingPage() {
 
             gap:
               isMobile
-                ? 24
+                ?20 
                 : 120,
 
             marginBottom: 25,
@@ -492,7 +492,7 @@ export default function BookingPage() {
 
             gap:
               isMobile
-                ? 24
+                ? 20
                 : 120,
           }}
         >
