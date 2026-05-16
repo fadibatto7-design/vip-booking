@@ -183,7 +183,10 @@ export default function BookingPage() {
           fontSize:
             isMobile ? 10 : 18,
 
-          color: "white",
+          color:
+            selectedTable === table
+              ? "#000"
+              : "white",
 
           background:
             selectedTable === table
@@ -202,7 +205,7 @@ export default function BookingPage() {
 
           boxShadow:
             selectedTable === table
-              ? "0 0 8px gold"
+              ? "0 0 12px gold"
               : isBooked
               ? "0 0 8px red"
               : "0 0 8px #7014da",
@@ -245,7 +248,11 @@ export default function BookingPage() {
               ? "column"
               : "row",
 
-          gap: 12,
+          gap: 22,
+
+          alignItems: "center",
+
+          justifyContent: "center",
 
           marginBottom: 20,
         }}
@@ -255,24 +262,39 @@ export default function BookingPage() {
           src="/logomusicno1.png"
           alt=""
           style={{
-            width: "100%",
+            width:
+              isMobile
+                ? "88%"
+                : 320,
 
             height:
               isMobile
-                ? 180
-                : 260,
+                ? 170
+                : 220,
 
             objectFit: "contain",
 
             background: "#000",
 
-            borderRadius: 20,
+            borderRadius: 22,
 
-            padding: 8,
+            padding: 18,
+
+            display: "block",
+
+            margin: "0 auto",
+
+            alignSelf: "center",
+
+            border: "1px solid #1f1f1f",
           }}
         />
 
-        <div>
+        <div
+          style={{
+            width: "100%",
+          }}
+        >
 
           <h1
             style={{
@@ -280,6 +302,8 @@ export default function BookingPage() {
                 isMobile
                   ? 26
                   : 55,
+
+              lineHeight: 1.2,
 
               marginBottom: 15,
             }}
@@ -329,9 +353,17 @@ export default function BookingPage() {
           background: "#0b0b0b",
           borderRadius: 25,
           border: "1px solid #1f1f1f",
-          padding: isMobile ? 10 : 25,
+
+          padding:
+            isMobile
+              ? 10
+              : 25,
+
           marginBottom: 20,
-          overflow: "hidden",
+
+          overflowX: "auto",
+
+          overflowY: "hidden",
         }}
       >
 
@@ -341,12 +373,12 @@ export default function BookingPage() {
           style={{
             width:
               isMobile
-                ? "100%"
-                : "50%",
+                ? "92%"
+                : "55%",
 
             margin: "0 auto",
 
-            padding: 12,
+            padding: 14,
 
             borderRadius: 20,
 
@@ -375,8 +407,14 @@ export default function BookingPage() {
         <div
           style={{
             display: "flex",
+
             justifyContent: "center",
-            gap: isMobile ? 12 : 90,
+
+            gap:
+              isMobile
+                ? 24
+                : 120,
+
             marginBottom: 25,
           }}
         >
@@ -388,7 +426,10 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 8 : 20,
+              gap:
+                isMobile
+                  ? 10
+                  : 22,
             }}
           >
             {leftTopTables.map(renderTable)}
@@ -401,7 +442,10 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 8 : 20,
+              gap:
+                isMobile
+                  ? 10
+                  : 22,
             }}
           >
             {rightTopTables.map(renderTable)}
@@ -443,8 +487,13 @@ export default function BookingPage() {
         <div
           style={{
             display: "flex",
+
             justifyContent: "center",
-            gap: isMobile ? 12 : 90,
+
+            gap:
+              isMobile
+                ? 24
+                : 120,
           }}
         >
 
@@ -455,7 +504,10 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 8 : 20,
+              gap:
+                isMobile
+                  ? 10
+                  : 22,
             }}
           >
             {leftBottomTables.map(renderTable)}
@@ -468,7 +520,10 @@ export default function BookingPage() {
               gridTemplateColumns:
                 "repeat(4,1fr)",
 
-              gap: isMobile ? 8 : 20,
+              gap:
+                isMobile
+                  ? 10
+                  : 22,
             }}
           >
             {rightBottomTables.map(renderTable)}
