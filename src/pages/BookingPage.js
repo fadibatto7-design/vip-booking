@@ -866,7 +866,7 @@ export default function BookingPage() {
                 fontSize: isMobile ? 15 : 18,
                 marginBottom: "0 auto 18px",
                 direction: "rtl",
-                textAlign:"right"
+                textAlign:"center",
               }}
             >
              عند الدخول يرجى إظهار QR Code
