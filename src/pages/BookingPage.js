@@ -814,6 +814,7 @@ export default function BookingPage() {
             alignItems: "center",
             zIndex: 9999,
             padding: 20,
+            overflowY: "auto",
           }}
         >
 
@@ -823,7 +824,7 @@ export default function BookingPage() {
               maxWidth: 320,
               background: "#050505",
               borderRadius: 22,
-              padding: 20,
+              padding: 16,
               textAlign: "center",
               border: "1px solid #222",
             }}
@@ -880,7 +881,7 @@ export default function BookingPage() {
 
               <QRCodeCanvas
                 value={JSON.stringify(ticketData)}
-                size={160}
+                size={145}
               />
 
             </div>
