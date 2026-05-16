@@ -251,25 +251,28 @@ export default function BookingPage() {
         }}
       >
 
-          <img
-         src="/logomusicno1.png"
-          alt=""
-         style={{
-         width:
-         isMobile
-         ? "100%"
-         : 160,
+           <img
+           src="/logomusicno1.png"
+           alt=""
+            style={{
+           width: "100%",
 
-         height:
-         isMobile
-         ? 180
-         : 230,
+           height:
+            isMobile
+            ? 220
+            : 260,
+  
+           objectFit: "contain",
 
-          objectFit: "cover",
+           background: "#000",
 
-          borderRadius: 20,
-         }}
-         />
+           borderRadius: 20,
+
+           padding: 10,
+           }}
+      
+           />
+
 
         <div>
 
