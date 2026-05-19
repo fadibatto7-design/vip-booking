@@ -647,7 +647,7 @@ export default function BookingPage() {
             }}
             style={countBtn}
           >
-            +
+            -
           </button>
 
           <div
