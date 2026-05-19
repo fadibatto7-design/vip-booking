@@ -641,7 +641,7 @@ export default function BookingPage() {
             onClick={() => {
 
               if (guests < 8) {
-                setGuests(guests -1);
+                setGuests(guests +1);
               }
 
             }}
