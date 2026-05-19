@@ -675,11 +675,11 @@ export default function BookingPage() {
 
           <button
             onClick={() =>
-              setGuests(guests + 1)
+              setGuests(guests - 1)
             }
             style={countBtn}
           >
-            +
+            -
           </button>
 
         </div>
