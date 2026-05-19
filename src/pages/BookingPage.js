@@ -640,14 +640,14 @@ export default function BookingPage() {
           <button
             onClick={() => {
 
-              if (guests > 1) {
-                setGuests(guests - 1);
+              if (guests < 8) {
+                setGuests(guests +1);
               }
 
             }}
             style={countBtn}
           >
-            -
+            +
           </button>
 
           <div
