@@ -674,9 +674,12 @@ export default function BookingPage() {
           </div>
 
           <button
-            onClick={() =>
-              setGuests(guests - 1)
-            }
+            onClick={() => {
+
+              if (guests > 1) {
+                setGuests(guests - 1)
+              }
+            }}
             style={countBtn}
           >
             -
